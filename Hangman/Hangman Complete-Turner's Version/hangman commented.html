@@ -1,0 +1,316 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Hangman</title>
+		<link rel = "stylesheet" href = "hangman.css" />
+		<style></style>
+		<script>
+			/*
+				initialize
+			*/
+			function initialize()
+			{
+				/*
+					Constants make programming a lot more comprehensible.  Giving names to constant values allows you to both read your code more easily AND update it without error if the need should arise.
+				*/
+				CODE_A = ("A").charCodeAt(0);		//Character code for "A".
+				CODE_Z = ("Z").charCodeAt(0);		//Character code for "Z"
+				
+				PLAYING = 0, WON = 1, LOST = 2;		//Game State Constants
+				HANGED = 7;							//Last value for the gallows.
+				
+				/*
+					HTML Elements
+				*/
+				solutionBox = document.getElementById("solbox");
+				gallowsImage = document.getElementById("galimg");
+				
+				buttonContainer = document.getElementById("buttonctr");
+				
+				guessBox = document.getElementById("guessbox");
+				
+				buttonList = document.getElementsByTagName("button");
+
+				//Begin the game.
+				startNewGame();
+			}
+			
+			/*
+				startNewGame
+				
+				Handles the construction (or reconstruction) of all of the game elements.  This function is used when the page is loaded AND when the player clicks the reset button.
+			*/
+			function startNewGame()
+			{
+				//Set up a new puzzle and the game status
+				hangmanPuzzle = loadPuzzle();
+				gallows = 1;
+
+				gameStatus = PLAYING;
+
+				/*
+					The hangmanSolution array parallel's the puzzle string with booleans.  Each boolean represents whether or not the character in the string is meant to be shown in the display.
+					
+					The array is initialized by looping through the puzzle.  Wherever there is a letter, a false is added to the array.  Wherever there is anything else, a true is added to the array.
+				*/
+				hangmanSolution = [];
+				var upPuzzle = hangmanPuzzle.toUpperCase();
+				for (var i = 0; i < hangmanPuzzle.length; i++)
+				{
+					currLetter = upPuzzle.charCodeAt(i);
+					if (currLetter <= CODE_Z && currLetter >= CODE_A)
+						hangmanSolution.push(false);
+					else
+						hangmanSolution.push(true);
+				}
+				
+				//Enable all of the letter buttons
+				for (var i = 0; i < buttonList.length; i++)
+					buttonList[i].disabled = false;
+				
+				/*
+					Make the buttonContainer visible by changing its display (which may be none from an old game.
+					The table display is used because all of the buttons are inside a table.
+				*/
+				buttonContainer.style.display = "table";
+				guessBox.value = "";
+				
+				display();
+			}
+			
+			/*
+				loadPuzzle
+				Determines the current puzzle and returns it.
+				
+				This function is undeveloped.  The program can have a hardcoded array of puzzles to load or, more likely, it will load puzzles from a database on a server.
+			*/
+			function loadPuzzle()
+			{
+				return "Super Mario Brothers";
+			}
+			
+			/*
+				fillPuzzleWithSolution
+				This simple utility function changes all of the items in the boolean array to true so that they will all show during display.
+			*/
+			function fillPuzzleWithSolution()
+			{
+				for (var i = 0; i < hangmanSolution.length; i++)
+					hangmanSolution[i] = true;
+			}
+			
+			/*
+				guessSolution
+				Called by the Guess button click, this function compares an uppercase version of the puzzle with an uppercase version of what's in the text box.
+			*/
+			function guessSolution()
+			{
+				/*
+					If the guess is correct, fill the boolean array with true values.  Otherwise, add 1 to the gallows.
+				*/
+				if(guessBox.value.toUpperCase() == hangmanPuzzle.toUpperCase())
+					fillPuzzleWithSolution();
+				else
+					gallows++;
+				
+				checkGameStatus();
+			}
+			
+			/*
+				updatePuzzle
+				Alters the boolean variable if the selected letter is found in the puzzle and returns whether or not it was found.
+				
+				Parameters:
+				letter:	The selected letter in capital form.
+				
+				Returns:
+				A boolean value that indicates whether or not the letter was found in the puzzle.
+			*/
+			function updatePuzzle(letter)
+			{
+				/*
+					foundLetter will be used as the return value.  It is initialized to false because the letter has not been found yet.  It will ONLY be set to true if the letter is eventually found.
+				*/
+				var foundLetter = false;
+				var upperString = hangmanPuzzle.toUpperCase();
+				for (var i = 0; i < upperString.length; i++)
+					if (upperString.charAt(i) == letter)
+					{
+						/*
+							Each time the letter is found in the puzzle, the corresponding index in the boolean array must be set to true.
+							The boolean foundLetter is also set to true.
+						*/
+						hangmanSolution[i] = true;
+						foundLetter = true;
+					}
+					
+				return foundLetter;
+			}
+
+			/*
+				makeGuess
+				Called by each of the letter buttons, this function's job is to see whether or not the chosen letter is in the puzzle.
+				
+				Parameters:
+				letter:	The selected letter, in capital form.
+			*/
+			function makeGuess(letter)
+			{
+				//Uses the return value of updatePuzzle to decide whether or not to set the gallows.
+				if (!updatePuzzle(letter))
+				{
+					gallows++;
+				}
+				
+				checkGameStatus();
+			}
+			
+			/*
+				checkGameStatus
+				May change the status of the game to WON or LOST based on the gallows and the state of the boolean array.
+			*/
+			function checkGameStatus()
+			{
+				//Has the gallows reached its final step.
+				if (gallows == HANGED)
+				{
+					gameStatus = LOST;
+					//Hide Buttons - Game Over - you lose
+				}
+				
+				//Are there any instances of "false" left in the boolean array?
+				if (hangmanSolution.indexOf(false) < 0)
+				{
+					gameStatus = WON;
+					//Hide Buttons  - Game over - you win
+				}
+			
+				display();
+			}
+			
+			/*
+				display
+			*/
+			function display()
+			{
+				/*
+					If the game is over (WON or LOST), show the solution to the puzzle and hide all of the buttons.
+				*/
+				if (gameStatus == WON || gameStatus == LOST)
+				{
+					fillPuzzleWithSolution();
+					buttonContainer.style.display = "none";
+				}
+
+				/*
+					Empty out the <div> that's going to hold the puzzle output.
+					Cycle through the boolean array.  Every time it finds a "true", it concatenates the appropriate character from the puzzle onto the innerHTML.  Every time it finds a "false", it concatenates a "-" onto the innerHTML.
+				*/
+				solutionBox.innerHTML = "";
+				for (var i = 0; i < hangmanSolution.length; i++)
+					if (hangmanSolution[i])
+						solutionBox.innerHTML += hangmanPuzzle.charAt(i);
+					else
+						solutionBox.innerHTML += "-";
+				
+				/*
+					Use string concatenation to build the src file name for the gallows image.
+				*/
+				gallowsImage.src = "images/gallows" + gallows + ".png";
+			}
+		</script>
+	</head>
+		
+	<!--
+		DESIGN
+		Using clever HTML placement and CSS, we can create a display that is intuitive and useful for a player.
+		
+		CSS 1
+		Create a background image by using an <img /> element.  The size is not terribly important as it will be resized on loading.
+		
+		CSS 2
+		Break the elements up into sections, using row and column display style.
+		
+		The "maincontainer" helps gain control over the other elements on the page.
+		
+		There are 2 columns, defined by <span> tags.  The first holds the letters.  I put them into a table to make it easier to equalize their display.  Below them are the rest of the controls including the textbox, the guess button, and the reset button.  The second column holds the gallows and the puzzle.
+		
+		<br /> and <hr /> tags can be used to separate elements in the columns.
+		
+		CSS 3
+		Create a title.  Put the title into an h1, so that we have block element centering ability.  Put the text of the title into a span so that we have the ability to style just that span.
+		
+		CSS 4
+		Add a background image to the maincontainer and to the title span, giving them a more solid background on which to show the game information.
+		
+		CSS 5
+		Style the table so that each letter button has the same width.  I put 4 buttons in each row, leaving 2 for the end. Unfortunately, 26 letters doesn't make for a good block grid.
+		
+		CSS 6
+		Everything else has to do with design choices.  Set up the fonts and sizes according to your tastes.
+	-->
+	<body onload = "initialize();">
+		<img class = "backimg" src = "images/hangman background.jpg" />
+		<h1><span><img class = "backimg" src = "images/innerback.png" />HANGMAN</span></h1>
+		<div class = "maincontainer">
+			<img class = "backimg" src = "images/innerback.png" />
+			<span class = "column">
+				<table id = "buttonctr">
+					<tr>
+						<!--
+							STEP 8 - disable the button
+						-->
+						<td><button id = "A" onclick = "makeGuess('A');disabled = true;">A</button id = ""></td>
+						<td><button id = "B" onclick = "makeGuess('B');disabled = true;">B</button id = ""></td>
+						<td><button id = "C" onclick = "makeGuess('C');disabled = true;">C</button id = ""></td>
+						<td><button id = "D" onclick = "makeGuess('D');disabled = true;">D</button id = ""></td>
+					</tr>
+					<tr>
+						<td><button id = "E" onclick = "makeGuess('E');disabled = true;">E</button id = ""></td>
+						<td><button id = "F" onclick = "makeGuess('F');disabled = true;">F</button id = ""></td>
+						<td><button id = "G" onclick = "makeGuess('G');disabled = true;">G</button id = ""></td>
+						<td><button id = "H" onclick = "makeGuess('H');disabled = true;">H</button id = ""></td>
+					</tr>
+					<tr>
+						<td><button id = "I" onclick = "makeGuess('I');disabled = true;">I</button id = ""></td>
+						<td><button id = "J" onclick = "makeGuess('J');disabled = true;">J</button id = ""></td>
+						<td><button id = "K" onclick = "makeGuess('K');disabled = true;">K</button id = ""></td>
+						<td><button id = "L" onclick = "makeGuess('L');disabled = true;">L</button id = ""></td>
+					</tr>
+					<tr>
+						<td><button id = "M" onclick = "makeGuess('M');disabled = true;">M</button id = ""></td>
+						<td><button id = "N" onclick = "makeGuess('N');disabled = true;">N</button id = ""></td>
+						<td><button id = "O" onclick = "makeGuess('O');disabled = true;">O</button id = ""></td>
+						<td><button id = "P" onclick = "makeGuess('P');disabled = true;">P</button id = ""></td>
+					</tr>
+					<tr>
+						<td><button id = "Q" onclick = "makeGuess('Q');disabled = true;">Q</button id = ""></td>
+						<td><button id = "R" onclick = "makeGuess('R');disabled = true;">R</button id = ""></td>
+						<td><button id = "S" onclick = "makeGuess('S');disabled = true;">S</button id = ""></td>
+						<td><button id = "T" onclick = "makeGuess('T');disabled = true;">T</button id = ""></td>
+					</tr>
+					<tr>
+						<td><button id = "U" onclick = "makeGuess('U');disabled = true;">U</button id = ""></td>
+						<td><button id = "V" onclick = "makeGuess('V');disabled = true;">V</button id = ""></td>
+						<td><button id = "W" onclick = "makeGuess('W');disabled = true;">W</button id = ""></td>
+						<td><button id = "X" onclick = "makeGuess('X');disabled = true;">X</button id = ""></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><button id = "Y" onclick = "makeGuess('Y');disabled = true;">Y</button id = ""></td>
+						<td><button id = "Z" onclick = "makeGuess('Z');disabled = true;">Z</button id = ""></td>
+						<td></td>
+					</tr>
+				</table>
+				<hr />
+				<input type = "text" id = "guessbox" placeholder = "Enter your guess here." /><br /><br />
+				<button id = "guessbtn" onclick = "guessSolution();">Guess</button>
+				<button onclick = "startNewGame();">Reset</button>
+			</span>
+			<span class = "column">
+				<img id = "galimg" src = "images/gallows1.png" />
+				<div id = "solbox"></div>
+			</span>
+		</div>
+	</body>
+</html>

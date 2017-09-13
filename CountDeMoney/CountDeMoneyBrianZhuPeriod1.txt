@@ -1,0 +1,211 @@
+<!DOCTYPE HTML>
+<!-- Brian Zhu Period 1-->
+
+<html>
+	<head>
+		<title>Count De Money Brian Zhu</title>
+		<style>
+			h1
+			{
+				color:orange;
+			}
+			button
+			{
+				color:yellow;
+				background-color:green;
+			}
+		</style>
+		<script>
+			function initialize()
+			{
+				pennyElement = document.getElementById("pennies");
+					pennyQty = 0
+				nickelElement = document.getElementById("nickels");
+					nickelQty = 0
+				dimeElement = document.getElementById("dimes");
+					dimeQty = 0
+				quarterElement = document.getElementById("quarters");
+					quarterQty = 0
+				walletElement = document.getElementById("wallet");
+					wallet = 0;
+			}
+			
+			function addOnePenny()
+			{
+				wallet += 1;
+				pennyQty += 1;
+			}
+			
+			function subtractOnePenny()
+			{
+				wallet -= 1;
+				pennyQty -= 1;
+			}
+			
+			function addFivePennies()
+			{
+				wallet += 5;
+				pennyQty += 5;
+			}
+			
+			function subtractFivePennies()
+			{
+				wallet -= 5;
+				pennyQty -= 5;
+			}
+			
+			function addOneNickel()
+			{
+				wallet += 5;
+				nickelQty += 1;
+			}
+			
+			function subtractOneNickel()
+			{
+				wallet -= 5;
+				nickelQty -= 1;
+			}
+			
+			function addFiveNickels()
+			{
+				wallet += 25;
+				nickelQty += 5;
+			}
+			
+			function subtractFiveNickels()
+			{
+				wallet -= 25;
+				nickelQty -= 5;
+			}
+			
+			function addOneDime()
+			{
+				wallet += 10;
+				dimeQty += 1;
+			}
+			
+			function subtractOneDime()
+			{
+				wallet -= 10;
+				dimeQty -= 1;
+			}
+			
+			function addFiveDimes()
+			{
+				wallet += 50;
+				dimeQty += 5;
+			}
+			
+			function subtractFiveDimes()
+			{
+				wallet -= 50;
+				dimeQty -= 5;
+			}
+			
+			function addOneQuarter()
+			{
+				wallet += 25;
+				quarterQty += 1;
+			}
+			
+			function subtractOneQuarter()
+			{
+				wallet -= 25;
+				quarterQty -= 1;
+			}
+			
+			function addFiveQuarters()
+			{
+				wallet += 125;
+				quarterQty += 5;
+			}
+			
+			function subtractFiveQuarters()
+			{
+				wallet -= 125;
+				quarterQty -= 5;
+			}
+			
+			function drawMoney ()
+			{
+				walletElement.innerHTML = "$" + (wallet/100).toFixed(2);
+				pennyElement.innerHTML = pennyQty;
+				nickelElement.innerHTML = nickelQty;
+				dimeElement.innerHTML = dimeQty;
+				quarterElement.innerHTML = quarterQty;
+			}
+			
+		</script>
+	</head>
+	
+	<body onload = "initialize();">
+		<h1>
+			Count De Money in My Wallet
+		</h1>
+	
+		<div id = "wallet">
+			0
+		</div>
+		
+		<p>
+		Pennies
+		</p>
+		
+		<p>
+		Number of pennies:
+			<span id = "pennies">
+				0
+			</span>
+		</p>
+			<button onclick = "addOnePenny(); drawMoney();">+1</button>
+			<button onclick = "subtractOnePenny(); drawMoney();">-1</button>
+			<button onclick = "addFivePennies(); drawMoney();">+5</button>
+			<button onclick = "subtractFivePennies(); drawMoney();">-5</button>
+			
+		<p>
+		Nickels
+		</p>
+		
+		<p>
+		Number of nickels:
+			<span id = "nickels">
+				0
+			</span>
+		</p>
+			<button onclick = "addOneNickel(); drawMoney();">+1</button>
+			<button onclick = "subtractOneNickel(); drawMoney();">-1</button>
+			<button onclick = "addFiveNickels(); drawMoney();">+5</button>
+			<button onclick = "subtractFiveNickels(); drawMoney();">-5</button>
+		
+		<p>
+		Dimes
+		</p>
+		
+		<p>
+		Number of dimes:
+			<span id = "dimes">
+				0
+			</span>
+		</p>
+			<button onclick = "addOneDime(); drawMoney();">+1</button>
+			<button onclick = "subtractOneDime(); drawMoney();">-1</button>
+			<button onclick = "addFiveDimes(); drawMoney();">+5</button>
+			<button onclick = "subtractFiveDimes(); drawMoney();">-5</button>
+		
+		<p>
+		Quarters
+		</p>
+		
+		<p>
+		Number of quarters:
+			<span id = "quarters">
+				0
+			</span>
+		</p>
+			<button onclick = "addOneQuarter(); drawMoney();">+1</button>
+			<button onclick = "subtractOneQuarter(); drawMoney();">-1</button>
+			<button onclick = "addFiveQuarters(); drawMoney();">+5</button>
+			<button onclick = "subtractFiveQuarters(); drawMoney();">-5</button>
+		
+	</body>
+</html>

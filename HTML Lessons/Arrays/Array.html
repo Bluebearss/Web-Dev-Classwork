@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<!-- Brian Zhu -->
+<html>
+	<head>
+		<title></title>
+		<style></style>
+		<script src = "utilities.js"></script>
+		<script>
+			function initialize()
+			{
+				divElement = document.getElementById("thediv");
+				
+				qtyNum = getRandomInteger(50,100);
+				
+				randomArray = [];
+				
+				while(qtyNum > 0)
+				{
+					randomArray[qtyNum] = getRandomInteger(0,100);
+					
+					qtyNum -= 1;
+				}
+				
+				divElement.innerHTML = randomArray;
+			}
+		</script>
+	</head>
+	
+	<body onload = "initialize();">
+		<div id = "thediv">
+		</div>
+	</body>
+</html>

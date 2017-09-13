@@ -1,0 +1,298 @@
+<!DOCTYPE HTML>
+<!-- Brian Zhu -->
+<html>
+	<head>
+		<title>Unk and Goob's Stone Game</title>
+		<style>
+		div
+		{
+			padding:20px;
+		}
+		img
+		{
+			height:150px;
+		}
+		button
+		{
+			font-family:goudy old style;
+			background-color:turquoise;
+		}
+		body
+		{
+			text-align:center;
+			font-family:goudy stout;
+			font-size:75%;
+			background-color:burlywood;
+		}
+		</style>
+		<script>
+			function initialize()
+			{
+				numberPileOneElement = document.getElementById("pileonenumber");
+				pileOneQty = 3;
+				
+				numberPileTwoElement = document.getElementById("piletwonumber");
+				pileTwoQty = 3;
+				
+				numberPileThreeElement = document.getElementById("pilethreenumber");
+				pileThreeQty = 3;
+				
+				commentElement = document.getElementById("commentarea");
+				
+				insultElement = document.getElementById("insultarea");
+			}
+			
+			function unkInitiate()
+			{
+				{
+					if (pileOneQty > pileTwoQty && pileOneQty > pileThreeQty)
+					{
+						pileOneQty -= 1;
+						commentElement.innerHTML = "PILE 1 IS BEST LUCK!";
+					}
+					else
+						if (pileTwoQty > pileOneQty && pileTwoQty > pileThreeQty)
+						{
+							pileTwoQty -= 1;
+							commentElement.innerHTML = "PILE 2 IS MINE!";
+						}
+						else
+							if (pileThreeQty > pileOneQty && pileThreeQty > pileTwoQty)
+							{
+								pileThreeQty -= 1;
+								commentElement.innerHTML = "PILE 3 IS BEST!";
+							}
+							else
+								if (pileThreeQty > pileTwoQty && pileOneQty > pileTwoQty && pileThreeQty == pileOneQty)
+								{
+									pileOneQty -= 1;
+									commentElement.innerHTML = "PILE 1 IS BEST LUCK!";
+								}
+								else
+									if (pileOneQty > pileThreeQty && pileTwoQty > pileThreeQty && pileOneQty == pileTwoQty)
+									{
+										pileTwoQty -= 1;
+										commentElement.innerHTML = "PILE 2 IS MINE!";
+									}
+									else
+										if (pileTwoQty > pileOneQty && pileThreeQty > pileOneQty && pileTwoQty == pileThreeQty)
+										{
+											pileThreeQty -= 1;
+											commentElement.innerHTML = "PILE 3 IS BEST!";
+										}
+										else
+											if (pileOneQty == pileTwoQty && pileOneQty == pileThreeQty && pileTwoQty == pileThreeQty)
+											{
+												pileOneQty -= 1;
+												commentElement.innerHTML = "PILE 1 IS BEST LUCK!";
+											}
+											
+						if (pileOneQty == 0 && pileTwoQty == 0 && pileThreeQty == 0)
+						{
+							insultElement.innerHTML = "HOW IS POSSIBLE?! WE ALWAYS WIN! GET STONES OUT ME FACE!";
+						}
+				}
+			}
+			function firstTurn()
+			{
+				if (pileOneQty == 3 && pileTwoQty == 3 && pileThreeQty == 3)
+				{
+					commentarea.innerHTML = 'OORGH BLARH ERRR! "GLOOB SAY TAKE FIRST STONE FROM PILE TWO!" say Unk.';
+					pileTwoQty -= 1;
+					displayStones();
+				}
+			}
+			
+			function pileOneStones(modifier)
+			{
+				if (pileOneQty < modifier)
+				{
+					pileOneQty = pileOneQty;
+				}
+				else
+				{
+					pileOneQty -= modifier;
+					insultElement.innerHTML = "HAHA WHY CHOOSE PILE ONE? STUPID PLAYER!";
+				}
+				
+				if(pileOneQty == 0 && pileTwoQty == 0 && pileThreeQty == 0)
+				{
+					insultElement.innerHTML = "UNK AND GLOOB ARE VICTORIOUS! WE CAVEMEN SMARTIES!";
+				}
+				else
+				{
+					unkInitiate();
+				}
+				
+				if (pileOneQty < 0)
+				{
+					pileOneQty = 0;
+				}
+				
+				displayStones();
+			}
+			
+			function pileTwoStones(modifier)
+			{
+				
+				if (pileTwoQty < modifier)
+				{
+					pileTwoQty = pileTwoQty;
+				}
+				else
+				{
+					pileTwoQty -= modifier;
+					insultElement.innerHTML = "WHY YOU NO LEARN?! PILE TWO IS WORST ONE!";
+				}
+				
+				if (pileOneQty == 0 && pileTwoQty == 0 && pileThreeQty == 0)
+				{
+					insultElement.innerHTML = "UNK AND GLOOB ARE VICTORIOUS! WE CAVEMEN SMARTIES!";
+				}
+				else
+				{
+					unkInitiate();
+				}
+				
+				if (pileTwoQty < 0)
+				{
+					pileTwoQty = 0;
+				}
+				
+				displayStones();
+			}
+			
+			function pileThreeStones(modifier)
+			{
+
+				if (pileThreeQty < modifier)
+				{
+					pileThreeQty = pileThreeQty;
+				}
+				else
+				{
+					pileThreeQty -= modifier;
+					insultElement.innerHTML = "YOU PLAYER ALWAYS BAD AT MAKING DECISIONS!";
+				}
+				
+				if(pileOneQty == 0 && pileTwoQty == 0 && pileThreeQty == 0)
+				{
+					insultElement.innerHTML = "UNK AND GLOOB ARE VICTORIOUS! WE CAVEMEN SMARTIES!";
+				}
+				else
+				{
+					unkInitiate();
+				}
+				
+				if (pileThreeQty < 0)
+				{
+					pileThreeQty = 0;
+				}
+				
+				displayStones();
+			}
+			
+			function resetGame()
+			{
+				pileOneQty = 3;
+				pileTwoQty = 3;
+				pileThreeQty = 3;
+				commentarea.innerHTML = "";
+				insultarea.innerHTML = "";
+				displayStones();
+			}
+			
+			function displayStones()
+			{
+				numberPileOneElement.innerHTML = pileOneQty;
+				
+				numberPileTwoElement.innerHTML = pileTwoQty;
+				
+				numberPileThreeElement.innerHTML = pileThreeQty;
+			}
+		
+		</script>
+	</head>
+	
+	<body onload = "initialize();">
+		<h1>
+			WELCOME TO UNK AND GLOOB'S STONE GAME!
+		</h1>
+		
+		<hr />
+		<img src = "gloob.jpg" />
+		<img src = "unk.jpg" />
+		
+		<h4>
+		There are 3 piles of stones. On your turn, click a button to take stones from the pile. On our turn, we will do the same. Whichever of us removes the last stone from the board is the loser.
+		
+		<div id = "commentarea">
+		</div>
+		
+		<div id = "insultarea">
+		</div>
+		
+		</h4>
+		
+		<hr />
+		
+		<img src = "stonepile.jpg" />
+		
+		<div>
+		<button onclick = "firstTurn();">Begin Game</button>
+		
+		<button onclick = "resetGame();">Reset</button>
+		</div>
+		
+		<h2>
+		Pile 1
+		</h2>
+		
+		<button onclick = "pileOneStones(1);">Take 1 Stone</button>
+		
+		<button onclick = "pileOneStones(2);">Take 2 Stones</button>
+		
+		<button onclick = "pileOneStones(3);">Take 3 Stones</button>
+		
+		<p>
+		Number of Stones Left:
+		<span id = "pileonenumber">
+			3
+		</span>
+		</p>
+		
+		<h2>
+		Pile 2
+		</h2>
+		
+		<button onclick = "pileTwoStones(1);">Take 1 Stone</button>
+		
+		<button onclick = "pileTwoStones(2);">Take 2 Stones</button>
+		
+		<button onclick = "pileTwoStones(3);">Take 3 Stones</button>
+		
+		<p>
+		Number of Stones Left:
+		<span id = "piletwonumber">
+			3
+		</span>
+		</p>
+		
+		<h2>
+		Pile 3
+		</h2>
+		
+		<button onclick = "pileThreeStones(1);">Take 1 Stone</button>
+		
+		<button onclick = "pileThreeStones(2);">Take 2 Stones</button>
+		
+		<button onclick = "pileThreeStones(3);">Take 3 Stones</button>
+		
+		<p>
+		Number of Stones Left:
+		<span id ="pilethreenumber">
+			3
+		</span>
+		</p>
+	</body>
+</html>

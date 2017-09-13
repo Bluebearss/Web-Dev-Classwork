@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<!-- Ivan Turner -->
+<html>
+	<head>
+		<title>Card Engine Tester</title>
+		<style></style>
+		<script src = "utilities.js"></script>
+		<script src = "cardengine.js"></script>
+		<script>
+			function initialize()
+			{
+				cardOutBox = document.getElementById("cardbox");
+				cardOutArray = cardOutBox.getElementsByTagName("img");
+				
+				deck = generateStandardDeck();
+				
+				shuffleDeck(deck);
+				
+				display();
+			}
+			
+			function display()
+			{
+				for (var i = 0; i < deck.length; i++)
+				{
+					cardOutArray[i].src = "cardimages/" + deck[i].cardImg;
+				}
+			}
+		</script>
+	</head>
+		
+	<body onload = "initialize();">
+		<div id = "cardbox">
+			<img /><img /><img /><img /><img /><img /><img /><img /><img /><img /><img /><img /><img /><br />
+			<img /><img /><img /><img /><img /><img /><img /><img /><img /><img /><img /><img /><img /><br />
+			<img /><img /><img /><img /><img /><img /><img /><img /><img /><img /><img /><img /><img /><br />
+			<img /><img /><img /><img /><img /><img /><img /><img /><img /><img /><img /><img /><img /><br />
+		</div>
+	</body>
+</html>

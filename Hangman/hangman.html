@@ -1,0 +1,160 @@
+<!DOCTYPE HTML>
+<!-- Brian Zhu -->
+<html>
+	<head>
+		<title></title>
+		<style></style>
+		<script>
+			function initialize()
+			{
+				PLAYING = 0;
+				
+				WON = 1;
+				
+				LOSE = 2;
+				
+				gameStatus = PLAYING;
+				
+				CODE_A = "A".charCodeAt(0);
+				
+				CODE_Z = "Z".charCodeAt(0);
+				
+				puzzleOutElement = document.getElementById("puzzleout");
+				
+				gallowsElement = document.getElementById("gallows");
+				
+				puzzle = "ILOVEMRTURNER!";
+				
+				gallowsState = 1;
+				
+				puzzleArray = [];
+				
+				for (var i = 0; i < puzzle.length; i++)
+				{
+					var currCode = puzzle.toUpperCase().charCodeAt(i);
+					if(currCode >= CODE_A && currCode <= CODE_Z)
+					{
+						puzzleArray.push(false);
+					}
+					else
+					{
+						puzzleArray.push(true);
+					}
+				}
+				
+				reset();
+			}
+			
+			function makeGuess(letter)
+			{
+				letterFound = false;
+				
+				puzzle.toUpperCase();
+				
+				for(var i = 0; i < puzzle.length; i++)
+				{
+					if (puzzle.charAt(i) == letter)
+					{
+						puzzleArray[i] = true;
+						letterFound = true;
+					}
+				}
+				
+				if (letterFound == false)
+				{
+					gallowsState++;
+				}
+				
+				gameStatus = checkGameStatus();
+				
+				display();
+			}
+			
+			function checkGameStatus()
+			{
+				if (puzzleArray.indexOf("false"))
+				{
+					return 
+				}
+			}
+			
+			function display()
+			{
+				gallowsElement.src = "images/gallows" + gallowsState + ".png";
+				
+				puzzleOutElement.innerHTML = "";
+				
+				for (var i = 0; i < puzzleArray.length; i++)
+				{
+					if(puzzleArray[i] == true)
+					{
+						puzzleOutElement.innerHTML += puzzle.charAt(i);
+					}
+					else
+					{
+						puzzleOutElement.innerHTML += "_";
+					}
+				}
+				
+			}
+			
+			function reset()
+			{
+				initialize();
+			}
+		</script>
+	</head>
+	
+	<body onload = "initialize();">
+	<!--
+		Outline:
+		1. choose a word
+		2. choose a letter
+		3. check the phrase for the letter
+		4. if it doesn't have the letter add to gallows else write it into the puzzle
+		5. check end game (back to step 1)
+	-->
+		<div id = "puzzleout">
+		</div>
+		
+		<input type = "text" /><button>Guess the Puzzle</button>
+		
+		<img id = "gallows" src = "images/gallows1.png" />
+		<div>
+			<button onclick = "makeGuess('A'); this.disabled = true;">A</button>
+			<button onclick = "makeGuess('B'); this.disabled = true;">B</button>
+			<button onclick = "makeGuess('C'); this.disabled = true;">C</button>
+			<button onclick = "makeGuess('D'); this.disabled = true;">D</button>
+			<button onclick = "makeGuess('E'); this.disabled = true;">E</button>
+			<br />
+			<br />
+			<button onclick = "makeGuess('F'); this.disabled = true;">F</button>
+			<button onclick = "makeGuess('G'); this.disabled = true;">G</button>
+			<button onclick = "makeGuess('H'); this.disabled = true;">H</button>
+			<button onclick = "makeGuess('I'); this.disabled = true;">I</button>
+			<button onclick = "makeGuess('J'); this.disabled = true;">J</button>
+			<br />
+			<br />
+			<button onclick = "makeGuess('K'); this.disabled = true;">K</button>
+			<button onclick = "makeGuess('L'); this.disabled = true;">L</button>
+			<button onclick = "makeGuess('M'); this.disabled = true;">M</button>
+			<button onclick = "makeGuess('N'); this.disabled = true;">N</button>
+			<button onclick = "makeGuess('O'); this.disabled = true;">O</button>
+			<br />
+			<br />
+			<button onclick = "makeGuess('P'); this.disabled = true;">P</button>
+			<button onclick = "makeGuess('Q'); this.disabled = true;">Q</button>
+			<button onclick = "makeGuess('R'); this.disabled = true;">R</button>
+			<button onclick = "makeGuess('S'); this.disabled = true;">S</button>
+			<button onclick = "makeGuess('T'); this.disabled = true;">T</button>
+			<br />
+			<br />
+			<button onclick = "makeGuess('U'); this.disabled = true;">U</button>
+			<button onclick = "makeGuess('V'); this.disabled = true;">V</button>
+			<button onclick = "makeGuess('W'); this.disabled = true;">W</button>
+			<button onclick = "makeGuess('X'); this.disabled = true;">X</button>
+			<button onclick = "makeGuess('Y'); this.disabled = true;">Y</button>
+			<button onclick = "makeGuess('Z'); this.disabled = true;">Z</button>
+		</div>
+	</body>
+</html>

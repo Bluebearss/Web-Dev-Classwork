@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+<!-- Ivan Turner -->
+<html>
+	<head>
+		<title>Tables</title>
+		
+		<style>
+			body, button
+			{
+				font:18pt calibri;
+			}
+			
+			div
+			{
+				font-size:18pt;
+				text-align:right;
+			}
+			
+			table
+			{
+				border-style:outset;
+				border-width:12px;
+				border-color:cornflowerblue;
+				
+				text-align:center;
+				
+				width:75%;
+				
+				margin:auto;
+			}
+			
+			td
+			{
+				border-style:solid;
+				border-width:thin;
+				
+				padding:5px;
+			}
+			
+			th
+			{
+				font-size:24pt;
+				width:33%;
+			}
+		</style>
+		
+		<script>
+			function initialize()
+			{
+				/*
+					HTML Element Objects
+				*/
+				theTable = document.getElementById("mytbl");
+				firstCellInput = document.getElementById("firstin");
+				secondCellInput = document.getElementById("secondin");
+				numCellsInput = document.getElementById("qtyin");
+			}
+			
+			/*
+				addRowToTable
+				
+				Parameters:
+					howMany:	the number of rows being added
+			*/
+			function addRowToTable(howMany)
+			{
+				//Establish a counter variable.
+				ctr = 0;
+				
+				/*
+					My loop will count each row that gets added.  When the counter reaches the number of rows specified, the loop will stop.
+				*/
+				while (ctr < howMany)
+				{
+					//create a new row.
+					newRow = theTable.insertRow();
+					
+					/*
+						Add 2 cells to the row.
+						The function addCellToRow takes in 2 parameters, one for the row object itself and the other for whatever will go into the new cell's innerHTML.  I want to use the text from the text box so I'm passing in the specific text box's value.
+					*/
+					addCellToRow(newRow, firstCellInput.value);
+					addCellToRow(newRow, secondCellInput.value);
+					
+					//Increase the counter.
+					ctr++;
+				}
+			}
+			
+			/*
+				addCellToRow
+				
+				Parameters:
+					theRow:	a table row object
+					txt:	text that will be added to the innerHTML of the new cell.
+			*/
+			function addCellToRow(theRow, txt)
+			{
+				newCell = theRow.insertCell();
+				newCell.innerHTML = txt;
+			}
+			
+		</script>
+	</head>
+		
+	<body onload = "initialize();">
+		<table id = "mytbl">
+			<tr>
+				<th>
+					<div>
+						<!--
+							By encapsulating the <input /> tag inside of a <label>, you can activate the text box by clicking on either the text box itself or the text inside the label.
+						-->
+						<label>First Cell <input id = "firstin" type = "text" /></label><br />
+						<label>Second Cell <input id = "secondin" type = "text" /></label>
+					</div>
+				</th>
+				<th>
+					<div>
+						<label>How Many <input id = "qtyin" type = "text" /></label><br />
+						
+						<!--
+							The addRowToTable function needs to know how many rows to add.  That number comes from the numCellsInput text box so I pass in its value.
+						-->
+						<button onclick = "addRowToTable(numCellsInput.value);">Add Rows</button>
+					</div>
+				</th>
+			</tr>
+
+		</table>
+	</body>
+</html>

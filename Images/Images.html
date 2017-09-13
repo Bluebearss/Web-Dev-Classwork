@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<!-- Brian Zhu -->
+<html>
+	<head>
+		<title>Images</title>
+		<style>
+		body
+		{
+			font-size:24pt;
+		}
+		img
+		{
+			float:left;
+			padding-right:20px;
+		}
+		</style>
+		<script>
+			function initialize()
+			{
+				floatElement = document.getElementById("dog");
+				
+				floatQty = false;
+			}
+			
+			function toggleFloat()
+			{
+				floatQty = !floatQty;
+				display();
+			}
+			
+			function display()
+			{
+				if(floatQty)
+				{
+					floatElement.style.float = "left";
+				}
+				else
+				{
+					floatElement.style.float = "right";
+				}
+			}
+		</script>
+	</head>
+	
+	<body onload = "initialize();">
+		<div id = "dog">
+			<img src = "dog2.jpg" />
+		</div>
+		
+		<p>
+			<button onclick = "toggleFloat();">Toggle Float</button>
+		</p>
+		
+	</body>
+</html>

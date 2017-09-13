@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<!-- Brian Zhu -->
+<html>
+	<head>
+		<title>Vault</title>
+		<style>
+			div.codemsg
+			{
+				display:none;
+			}
+		</style>
+		<script src = "utilities.js"></script>
+		<script>
+			function initialize()
+			{
+				codeMsg = document.getElementById("msg");
+				guessInput = document.getElementById("guess");
+				attemptMessageOutput = document.getElementById("attemptmsg");
+				vault = new Object();
+				
+				codeFirstNum = getRandomInteger(1, 3);
+				codeSecondNum = getRandomInteger(1, 3);
+				codeThirdNum = getRandomInteger(1, 3);
+				
+				vault.vaultcode = codeFirstNum + "" + codeSecondNum + "" + codeThirdNum;
+				
+				display();
+			}
+
+			function checkCode()
+			{
+				vaultSum = (codeFirstNum * 100) + (codeSecondNum * 10) + codeThirdNum;
+				
+				if (guessInput.value < vaultSum)
+				{
+					attemptMessageOutput.innerHTML = "Your guess is too low!";
+				}
+
+				if (guessInput.value > vaultSum)
+				{
+					attemptMessageOutput.innerHTML = "Your guess is too high!";
+				}
+				
+				if (guessInput.value == vaultSum)
+				{
+					codeMsg.style.display = "inline";
+					
+					attemptMessageOutput.innerHTML = "You've broke the code! Good work partner!";
+				}
+			}
+			
+			function display()
+			{
+				codeMsg.innerHTML = vault.vaultcode;
+			}
+		</script>
+	</head>
+	
+	<body onload = "initialize();">
+		<h1>Try to Break into the Vault!</h1>
+		<div class = "codemsg" id = "msg"></div>
+		<div>
+			<input id = "guess" type = "text" />
+			<button onclick = "checkCode();">Guess the Code!</button>
+		</div>
+		<div id = "attemptmsg"></div>
+	</body>
+</html>

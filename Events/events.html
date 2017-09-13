@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<!-- Brian Zhu -->
+<html onclick = "showLocation('event');">
+	<head>
+		<title></title>
+		<style>
+		</style>
+		<script>
+			function initialize()
+			{
+				outBox = document.getElementById("coordinates");
+			}
+			
+			function showLocation(e)
+			{
+				outBox.innerHTML = "(" + e.clientX + "," + e.clientY + ")";
+			}
+		</script>
+	</head>
+	
+	<body onload = "initialize();">
+		<div id = "coordinates"></div>
+	</body>
+</html>

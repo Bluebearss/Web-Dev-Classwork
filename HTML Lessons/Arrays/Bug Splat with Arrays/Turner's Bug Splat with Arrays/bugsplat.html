@@ -1,0 +1,236 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Bug Splat</title>
+		<style>
+			body
+			{
+				background-image:url("images/grassbackground.png");
+				color:white;
+				font:bold 24pt calibri;
+			}
+			
+			div, h1, p 
+			{
+				text-align:center; 
+			}
+			
+			div.bugcontainer
+			{
+				width:80%;
+				margin:auto;
+			}
+			
+			img 
+			{
+				padding:5px;
+				width:175px;
+			}
+			
+			span
+			{
+				color:black;
+				padding:15px;
+				background-color:lightgrey;
+			}
+		</style>
+
+		<script src = "utilities.js"></script>
+		<script type = "text/javascript">
+			function initialize()
+			{
+				/*
+					I split the comments into 2 separate arrays because I remove comments from the array whenever one is selected.  This way, I never have to check whether or not a comment has been used.  Used comments are no longer in the array.
+				*/
+				hardComments = ["You'll have to do better than that!", "Hah!", "We will swarm your homeland!", "The many legs of the insect world will stampede over your pitiful efforts!", "You call that squashing?", "We will bathe in the blood of our enemies!"]
+				softComments = ["Please!  No more!", "Oh, no!  Not Murray!", "Retreat!", "Have you no mercy?!", "My leg!  Is that <i>my</i> leg?", "What kind of a monster are you?"];
+				
+				bugImageList = [];
+				
+				/*
+					Filling the list.
+					Each image element on the page is given an id that follows the format bug#img.  Using string concatenation and a counter, I can loop through as many images as I like.  If you look at the bottom of the page, you'll see that I commented out 5 extra bugs to test whether or not this dynamic filling of the array works with any number of bugs.
+				*/
+				i = 1;
+				do
+				{
+					/*
+						If the index (i) makes a proper id, el will be given an object.  If it doesn't, getElementById will return null.
+					*/
+					el = document.getElementById("bug" + i + "img");
+					if (el != null)
+						bugImageList[i - 1] = el;	//I started i at 1 so I have to subtract 1 in order to build a proper array.
+						
+					i++;
+				}while (el != null);
+				
+				//bugSpawn is used for the bonus where the bugs may respawn if more than half of them are gone.
+				bugsSpawn = false;
+				messageOut = document.getElementById("messageBox");
+				gameLength = bugImageList.length;
+				numLivingBugs = bugImageList.length;
+			}
+			
+			/*
+				getSplatComment
+				This function returns a comment based on the specifications of the project.
+				
+				Returns
+				A string containing a comment.
+			*/
+			function getSplatComment()
+			{
+				if (numLivingBugs <= 0)
+					return "You've killed us all.";
+
+				if (numLivingBugs % 2 == 1)
+					return "Ouch!";
+				else
+				{
+					/*
+						Passes through the hard or soft array depending upon how many bugs are left in the array.
+						This number has to be checked via the array rather than using a hard coded number because the number of bugs may increase if there's a respawn.
+					*/
+					if (numLivingBugs > bugImageList.length / 2)
+						return generateRandomComment(hardComments);
+					else
+						return generateRandomComment(softComments);
+				}
+				
+				//A default is set up in case the array runs out of comments.
+				return "OUCH!";
+			}
+			
+			/*
+				generateRandomComment
+				Pulls a random comment out of an array.
+				
+				Parameter
+				commentArray:	A list of comment strings.
+				
+				Returns
+				A string pulled from the comment array.
+			*/
+			function generateRandomComment(commentArray)
+			{
+				//If the array is empty, return a default.
+				if (commentArray.length == 0)
+					return "OUCH!";
+			
+				/*
+					Generate a random number based on the size of the array.
+					
+					Remember that the last index is the length -1.
+				*/
+				rndNum = getRandomInteger(0, commentArray.length - 1);
+				
+				//Save the comment so that it can be returned.
+				var selComment = commentArray[rndNum];
+				
+				//Remove the comment from the array.
+				commentArray.splice(rndNum, 1);
+				
+				return selComment;
+			}
+			
+			/*
+				spawnBug
+				May put a new bug back onto the board, based on certain conditions.
+			*/
+			function spawnBug()
+			{
+				//There is a 10% chance of spawning a new bug.
+				if (Math.random() < .1)
+				{
+					//This loop continues to choose places in the array until it finds an empty one.
+					do
+					{
+						//Select a random index.
+						idx = getRandomInteger(1, bugImageList.length);
+						
+						/*
+							If the spot at that index (-1 because of the offset with the numbers) is empty, replace the null with the appropriate bug image.  I use a document.getElementById to retrieve the image from the page, reset the src to the original bug, and break.
+						*/
+						if (bugImageList[idx-1] == null)
+						{
+							bugImageList[idx-1] = document.getElementById("bug" + idx + "img");
+							bugImageList[idx-1].src = "images/bug.png";
+							numLivingBugs++;
+							
+							//A break statement ends a loop without executing further instructions or checking the condition.
+							break;
+						}
+						/*
+							This loop may appear to be infinite, but the embedded break will end it when a proper slot has been found and a bug has been inserted.
+						*/
+					} while (true);
+				}
+			}
+			
+			/*
+				splat
+				Handles the basic job of splatting the bug.
+				
+				Parameter
+				bugIndex:	The index, in the array, of the element that was clicked.
+			*/
+			function splat(bugIndex)
+			{
+				/*
+					If the slot in the list is already null, that means that this bug was already splatted and we shouldn't do anything further.
+				*/
+				if (bugImageList[bugIndex] == null)
+					return;
+					
+				/*
+					If we move on, we'll change that bug's image to the splat image and set that position to null.
+				*/
+				bugImageList[bugIndex].src = "images/splat.png";
+				bugImageList[bugIndex] = null;
+				
+				numLivingBugs--;
+				
+				//If the number of bugs has been reduced by half, check for a spawn.
+				if (numLivingBugs < gameLength / 2)
+					spawnBug();
+					
+				display();
+			}
+			
+			function display()
+			{
+				messageBox.innerHTML = getSplatComment();
+			}
+		</script>
+				
+	</head>
+		
+	<body onload = "initialize();">
+		<h1>All Your Bug Are Belong To Us!</h1>
+		<div class = "bugcontainer">
+				<img id = "bug1img" onclick = "splat(0);" src = "images/bug.png" />
+				<img id = "bug2img" onclick = "splat(1);" src = "images/bug.png" />
+				<img id = "bug3img" onclick = "splat(2);" src = "images/bug.png" />
+				<img id = "bug4img" onclick = "splat(3);" src = "images/bug.png" />
+				<img id = "bug5img" onclick = "splat(4);" src = "images/bug.png" />
+				<img id = "bug6img" onclick = "splat(5);" src = "images/bug.png" />
+				<img id = "bug7img" onclick = "splat(6);" src = "images/bug.png" />
+				<img id = "bug8img" onclick = "splat(7);" src = "images/bug.png" />
+				<img id = "bug9img" onclick = "splat(8);" src = "images/bug.png" />
+				<img id = "bug10img" onclick = "splat(9);" src = "images/bug.png" />
+				<img id = "bug11img" onclick = "splat(10);" src = "images/bug.png" />
+				<img id = "bug12img" onclick = "splat(11);" src = "images/bug.png" />
+				<img id = "bug13img" onclick = "splat(12);" src = "images/bug.png" />
+				<img id = "bug14img" onclick = "splat(13);" src = "images/bug.png" />
+				<img id = "bug15img" onclick = "splat(14);" src = "images/bug.png" />
+			<!--
+				<img id = "bug16img" onclick = "splat(15);" src = "images/bug.png" />
+				<img id = "bug17img" onclick = "splat(16);" src = "images/bug.png" />
+				<img id = "bug18img" onclick = "splat(17);" src = "images/bug.png" />
+				<img id = "bug19img" onclick = "splat(18);" src = "images/bug.png" />
+				<img id = "bug20img" onclick = "splat(19);" src = "images/bug.png" />
+			-->
+		</div>
+		<p><span id = "messageBox">You will never defeat us!</span></p>
+	</body>
+</html>

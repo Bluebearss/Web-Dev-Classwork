@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<!-- Brian Zhu -->
+<html onkeydown = "showEvent(event);">
+	<head>
+		<title></title>
+		<style>
+		</style>
+		<script>
+			function initialize()
+			{
+				outputQty = document.getElementById("output");
+			}
+			function showEvent(e)
+			{
+				outputQty.innerHTML = e.location;
+			}
+		</script>
+	</head>
+	
+	<body onload = "initialize();">
+		<img src = "images/red.png" />
+		<input type = "text" />
+		<div id = "output"></div>
+	</body>
+</html>

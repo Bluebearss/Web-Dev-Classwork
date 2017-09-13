@@ -1,0 +1,272 @@
+<!DOCTYPE HTML>
+<!-- Brian Zhu -->
+<html>
+	<head>
+		<title>Robot Builder Brian Zhu</title>
+		<style>
+			div
+			{
+				font-size:24pt;
+				font-family:arial black;
+			}
+			
+			button
+			{
+				font-size:15pt;
+				font-family:rockwell;
+			}
+		</style>
+		<script>
+			function initialize()
+			{
+				powerElement = document.getElementById("power");
+				powerQty = 0
+				
+				speedElement = document.getElementById("speed");
+				speedQty = 0
+				
+				fuelElement = document.getElementById("fuel");
+				fuelQty = 0
+				
+				isSleep = document.getElementById("mysleep");
+				isDance = document.getElementById("mydance");
+				
+				sleepMode = false;
+				danceMode = false;
+			}
+			
+			// This is the numeric properties set, each set to an incremeter modifier so value can be set in button. Also the if's are to limit the percentage of the numeric properties and to add color change to percentages.
+			
+			function modifyPower(modifier)
+			{
+				powerQty += modifier;
+				
+				if (powerQty < 0)
+				{
+					powerQty = 0;
+				}
+				
+				if (powerQty > 100)
+				{
+					powerQty = 100;
+				}
+				
+				if (powerQty >=0 && powerQty <=40)
+				{
+					powerElement.style.color = "red";
+				}
+				
+				if (powerQty >=41 && powerQty <=80)
+				{
+					powerElement.style.color = "yellow";
+				}
+				
+				if (powerQty >=81 && powerQty <=100)
+				{
+					powerElement.style.color = "green";
+				}
+			}
+			
+			function modifySpeed(modifier)
+			{
+				speedQty += modifier;
+				
+				if (speedQty < 0)
+				{
+					speedQty = 0;
+				}
+				
+				if (speedQty > 100)
+				{
+					speedQty = 100;
+				}
+				
+				if (speedQty >=0 && speedQty <=40)
+				{
+					speedElement.style.color = "red";
+				}
+				
+				if (speedQty >=41 && speedQty <=80)
+				{
+					speedElement.style.color = "yellow";
+				}
+				
+				if (speedQty >=81 && speedQty <=100)
+				{
+					speedElement.style.color = "green";
+				}
+			}
+			
+			function modifyFuel(modifier)
+			{
+				fuelQty += modifier;
+				
+				if (fuelQty < 0)
+				{
+					fuelQty = 0;
+				}
+				
+				if (fuelQty >100)
+				{
+					fuelQty = 100;
+				}
+				
+				if (fuelQty >=0 && fuelQty <=40)
+				{
+					fuelElement.style.color = "red";
+				}
+				
+				if (fuelQty >=41 && fuelQty <=80)
+				{
+					fuelElement.style.color = "yellow";
+				}
+				
+				if (fuelQty >=81 && fuelQty <=100)
+				{
+					fuelElement.style.color = "green";
+				}
+			}
+			
+			// The functions set to toggle the buttons, setting true-false statements. 
+			
+			function toggleSleep()
+			{
+				sleepMode = !sleepMode;
+				display();
+			}
+			
+			function toggleDance()
+			{
+				danceMode = !danceMode;
+				display();
+			}
+			
+			// This is where the span id Emotion's innerHTML is being alternated so when the button is clicked, it goes to the emotion connected to one of these functions.
+			
+			function happyEmotion()
+			{
+				emotion.innerHTML = "This robot is filled with joy!"
+			}
+			
+			function sadEmotion()
+			{
+				emotion.innerHTML = "This robot is filled with despair!"
+			}
+			
+			function braveEmotion()
+			{
+				emotion.innerHTML = "This robot is ready to take on whatever the world throws at it!"
+			}
+			
+			function scaredEmotion()
+			{
+				emotion.innerHTML = "This robot just wants to hide in a corner!"
+			}
+			
+			//Connects and draws the function in the backend. The if-else statements are for the toggle functions.
+			
+			function display()
+			{
+				powerElement.innerHTML = powerQty + "%";
+				
+				speedElement.innerHTML = speedQty + "%";
+				
+				fuelElement.innerHTML = fuelQty +"%";
+				
+				if(sleepMode)
+				{
+					isSleep.innerHTML = "Time to get a goodnight's rest!";
+				}
+				else
+				{
+					isSleep.innerHTML = "It's time to roll out!";
+				}
+				
+				if(danceMode)
+				{
+					isDance.innerHTML = "Doing the robot with the DJ!";
+				}
+				else
+				{
+					isDance.innerHTML = "Where did the DJ go!?";
+				}
+			}
+			
+		</script>
+	</head>
+	
+	<body onload = "initialize();">
+		<h1>
+			My Robot Builder...*BEEP BOOP*...Systems Online. 
+		</h1>
+		
+		<h1>
+		My power level is at:
+			<span id ="power">
+				0
+			</span>
+		</h1>
+			<button onclick = "modifyPower(5); display();">Add Power</button>
+			
+			<button onclick = "modifyPower(-5);display();">Subtract Power</button>
+		
+		<h1>
+		My speed level is at:
+			<span id ="speed">
+				0
+			</span>
+		</h1>
+			<button onclick = "modifySpeed(5); display();">Add Speed</button>
+			
+			<button onclick = "modifySpeed(-5); display();">Subtract Speed</button>
+		
+		<h1>
+		My fuel level is at:
+			<span id ="fuel">
+				0
+			</span>
+		</h1>
+			<button onclick = "modifyFuel(5); display();">Add Fuel</button>
+			
+			<button onclick = "modifyFuel(-5); display();">Subtract Fuel</button>
+		
+		<h1>
+		Sleep Mode:
+			<div id = "mysleep">
+				It's time to roll out!
+			</div>
+		</h1>
+		
+		<p>
+			<button onclick = "toggleSleep();">Toggle Sleep Mode</button>
+		</p>
+		
+		<h1>
+		Dance Mode:
+			<div id = "mydance">
+				Where did the DJ go!?
+			</div>
+		</h1>
+		
+		<p>
+			<button onclick = "toggleDance();">Toggle Dance Mode</button>
+		</p>
+		
+		<h1>
+		Emotional State:
+			<span id = "emotion">
+			Emotionless
+			</span>
+		</h1>
+		
+		<p>
+			<button onclick = "happyEmotion();">Change to a Happy State</button>
+			
+			<button onclick = "sadEmotion();">Change to a Sad State</button>
+			
+			<button onclick = "braveEmotion();">Change to a Brave State</button>
+			
+			<button onclick = "scaredEmotion();">Change to a Scared State</button>
+		</p>
+	</body>
+</html>

@@ -1,0 +1,387 @@
+<!DOCTYPE HTML>
+<!-- Brian Zhu -->
+<html>
+	<head>
+		<title>XTREME ROCK PAPER SCISSORS!</title>
+		<style>
+			body
+			{
+				background-color:orange;
+			}
+			img
+			{
+				height:120px;
+				padding:40px;
+				
+			}
+			
+			div
+			{
+				text-align:center;
+				font:bold 15pt ravie;
+			}
+			
+			h4
+			{
+				float:right;
+				text-align:center;
+				font:bold 15pt ravie;
+			}
+			
+			h2
+			{
+				float:left;
+				text-align:center;
+				font:bold 15pt ravie;
+			}
+			
+			span
+			{
+				text-align:center;
+				font:bold 15pt ravie;
+			}
+			
+			h1
+			{
+				text-align:center;
+				font:bold 15pt ravie;
+			}
+			
+			h3
+			{
+				padding:40px;
+				font:bold 15pt ravie;
+			}
+			h5
+			{
+				float:right;
+				font:bold 15pt ravie;
+			}
+		</style>
+		<script>
+			function initialize()
+			{
+				// CONSTANTS
+				ROCK = 1, PAPER = 2, SCISSOR = 3;
+				DRAW = 0, PLAYER = 1, COMPUTER = 2;
+				
+				computerImage = document.getElementById("compimg");
+				playerImage = document.getElementById("playerimg");
+				playerRock = document.getElementById("playernumrock");
+				playerPaper = document.getElementById("playernumpaper");
+				playerScissor = document.getElementById("playernumscissor");
+				computerRock = document.getElementById("compnumrock");
+				computerPaper = document.getElementById("compnumpaper");
+				computerScissor = document.getElementById("compnumscissor");
+				resultOutput = document.getElementById("roundResult");
+				
+				playerRockQty = 5;
+				playerPaperQty = 5;
+				playerScissorQty = 5;
+				compRockQty = 5;
+				compPaperQty = 5;
+				compScissorQty = 5;
+				
+				playerSelection = -1;
+				computerSelection = -1;
+				
+				roundResultOutput = PLAYER;
+			}
+			
+			function runGame(selection)
+			{
+				if (selection == PAPER && playerPaperQty > 0)
+				{
+					playerSelection = selection;
+					makeComputerSelection();
+					determineWinner();
+					arsenalChange();
+					displayResult();
+				}
+				
+				if (selection == ROCK && playerRockQty > 0)
+				{
+					playerSelection = selection;
+					makeComputerSelection();
+					determineWinner();
+					arsenalChange();
+					displayResult();
+				}
+				
+				if (selection == SCISSOR && playerScissorQty > 0)
+				{
+					playerSelection = selection;
+					makeComputerSelection();
+					determineWinner();
+					arsenalChange();
+					displayResult();
+				}
+			}
+			
+			function makeComputerSelection()
+			{
+				computerSelection = parseInt(Math.random() * 3) + 1;
+				
+				if (computerSelection == 1 && compRockQty <= 0)
+				{
+					makeComputerSelection();
+				}
+				
+				if (computerSelection == 2 && compPaperQty <= 0)
+				{
+					makeComputerSelection();
+				}
+				
+				if (computerSelection == 3 && compScissorQty <= 0)
+				{
+					makeComputerSelection();
+				}
+			}
+			
+			function determineWinner()
+			{
+				if (computerSelection == SCISSOR && playerSelection == ROCK)
+				{
+					return roundResultOutput = PLAYER;
+				}
+				
+				if (computerSelection == ROCK && playerSelection == SCISSOR)
+				{
+					return roundResultOutput = COMPUTER;
+				}
+				
+				if (computerSelection > playerSelection)
+				{
+					return roundResultOutput = COMPUTER;
+				}
+				
+				if (playerSelection > computerSelection)
+				{
+					return roundResultOutput = PLAYER;
+				}
+				
+				return roundResultOutput = DRAW;
+			}
+			
+			function arsenalChange()
+			{
+				if (computerSelection == ROCK && playerSelection == SCISSOR) 
+				{
+					playerScissorQty -= 1;
+					compScissorQty += 1;
+				}
+				
+				if (computerSelection == ROCK && playerSelection == PAPER) 
+				{
+					compRockQty -= 1;
+					playerRockQty += 1;
+				}
+				
+				if (computerSelection == PAPER && playerSelection == ROCK) 
+				{
+					playerRockQty -= 1;
+					compRockQty += 1;
+				}
+				
+				if (computerSelection == PAPER && playerSelection == SCISSOR) 
+				{
+					compPaperQty -= 1;
+					playerPaperQty += 1;
+				}
+				
+				if (computerSelection == SCISSOR && playerSelection == ROCK) 
+				{
+					compScissorQty -= 1;
+					playerScissorQty += 1;
+				}
+				
+				if (computerSelection == SCISSOR && playerSelection == PAPER) 
+				{
+					playerPaperQty -= 1;
+					compPaperQty += 1;
+				}
+				
+				playerRock.innerHTML = playerRockQty;
+				playerScissor.innerHTML = playerScissorQty;
+				playerPaper.innerHTML = playerPaperQty;
+				computerRock.innerHTML = compRockQty;
+				computerScissor.innerHTML = compScissorQty;
+				computerPaper.innerHTML = compPaperQty;
+			}
+			
+			function displayResult()
+			{
+				if (playerSelection == PAPER)
+				{
+					playerImage.src = "images/paper1.jpg";
+				}
+				
+				if (playerSelection == SCISSOR)
+				{
+					playerImage.src = "images/scissor1.jpg";
+				}
+				
+				if (playerSelection == ROCK)
+				{
+					playerImage.src = "images/rock1.jpg";
+				}
+				
+				if (computerSelection == PAPER)
+				{
+					computerImage.src = "images/paper2.jpg";
+				}
+				
+				if (computerSelection == SCISSOR)
+				{
+					computerImage.src = "images/scissor2.jpg";
+				}
+				
+				if (computerSelection == ROCK)
+				{
+					computerImage.src = "images/rock2.jpg";
+				}
+				
+				if (roundResultOutput == PLAYER)
+				{
+					resultOutput.innerHTML = "You are the winner!";
+				}
+				
+				if (roundResultOutput == COMPUTER)
+				{
+					resultOutput.innerHTML = "You Opponent is the winner!";
+				}
+				
+				if (roundResultOutput == DRAW)
+				{
+					resultOutput.innerHTML = "It is a tie game!";
+				}
+				
+				if (playerSelection == 1 && playerRockQty == 0)
+				{
+					resultOutput.innerHTML = "You have no more rocks at the moment! Choose another weapon."
+				}
+				
+				if (playerSelection == 2 && playerPaperQty == 0)
+				{
+					resultOutput.innerHTML = "You have no more papers at the moment! Choose another weapon."
+				}
+				
+				if (playerSelection == 3 && playerScissorQty == 0)
+				{
+					resultOutput.innerHTML = "You have no more scissors at the moment! Choose another weapon."
+				}
+				
+				if (playerRockQty == 0 && playerScissorQty == 0 && playerPaperQty == 0)
+				{
+					resultOutput.innerHTML = "The Computer is the winner of XTREMEEE Rock, Paper, Scissors! Better Luck Next Time.";
+					return;
+				}
+				
+				if (compRockQty == 0 && compScissorQty == 0 && compPaperQty == 0)
+				{
+					resultOutput.innerHTML = "You are the champion of the XTREMEEE Rock, Paper, Scissors!";
+					return;
+				}
+			}
+		</script>
+	</head>
+	
+	<body onload = "initialize();">
+		<h1>
+			XTREME ROCK PAPER SCISSORS!
+		</h1>
+		
+		<h2>
+			<span>
+				Your ARSENAL!
+			</span>
+			
+			<br />
+			
+			<br />
+			
+			<img onclick = "runGame(ROCK)" src = "images/rock1.jpg" />
+			
+			<span id = "playernumrock">
+				5
+			</span>
+			
+			<br />
+			
+			<img onclick = "runGame(PAPER)" src = "images/paper1.jpg" />
+			
+			<span id = "playernumpaper">
+				5
+			</span>
+			
+			<br />
+			
+			<img onclick = "runGame(SCISSOR)" src = "images/scissor1.jpg" />
+			
+			<span id = "playernumscissor">
+				5
+			</span>
+			
+			<br />
+		</h2>
+		
+		<h4>
+			<span>
+				YOUR OPPONENT'S ARSENAL!
+			</span>
+			
+			<br />
+			
+			<br />
+			
+			<img src = "images/rock2.jpg" />
+			
+			<span id = "compnumrock">
+				5
+			</span>
+			
+			<br />
+			
+			<img src = "images/paper2.jpg" />
+			
+			<span id = "compnumpaper">
+				5
+			</span>
+			
+			<br />
+			
+			<img src = "images/scissor2.jpg" />
+			
+			<span id = "compnumscissor">
+				5
+			</span>
+			
+			<br />
+		</h4>
+		
+		<h5>
+			Your Opponent Selected:
+			
+			<br />
+			
+			<img id = "compimg" src = "" />
+		</h5>
+		
+		<h3>
+			You Selected:
+			
+			<br />
+			
+			<img id = "playerimg" src = "" />
+		</h3>
+		
+		<span>
+			<div>
+			<img src = "images/referee.jpg" />
+			</div>
+		</span>
+		
+		<div id = "roundResult"></div>
+		
+	</body>
+</html>

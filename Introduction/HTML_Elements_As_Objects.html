@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<!-- Brian -->
+
+<html>
+	<head>
+		<title>HTML Elements as Objects</title>
+		<style></style>
+		<script>
+			function initialize()
+			{
+				counterElement = document.getElementById("mycounter");
+				
+				ctr = 0;
+			}
+			
+			function addOne ()
+			{
+				ctr = ctr + 1;
+			}
+			
+			function subtractOne ()
+			{
+				ctr = ctr - 1;
+			}
+			
+			function drawCounter ()
+			{
+				counterElement.innerHTML = ctr;
+			}
+			
+		</script>
+	</head>
+	
+	<body onload = "initialize();">
+	
+		<div id = "mycounter">
+			0
+		</div>
+	
+		<button onclick = "addOne(); drawCounter();">Add 1</button>
+		<button onclick = "subtractOne(); drawCounter();">Subtract 1</button>
+	</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<!-- Brian Zhu -->
+<html>
+	<head>
+		<title></title>
+		<style>
+		</style>
+		<script>
+			function initialize()
+			{
+				newImgOutput = document.getElementById("newimgs");
+				
+				theMaze = [];
+			}
+			
+			function mazeSection(imgsrc)
+			{
+				this.mazeImg = imgsrc;
+				this.trap = false;
+			}
+			
+			function placeTrap()
+			{
+				mazeSection.trap = true;
+			}
+			function placeSection(secImg)
+			{
+				var section = new mazeSection(secImg.src);
+				
+				theMaze.push(section);
+				
+				newImg = document.createElement("img");
+				
+				newImg.src = secImg.src;
+				
+				newImg.setAttribute("onclick", "removeSection(this);");
+				
+				newImg.mazePiece = section;
+				
+				newImgOutput.appendChild(newImg);
+			}
+			
+			function removeSection(sectionImg)
+			{
+				sectionImg.parentElement.removeChild(sectionImg);
+				
+				theMaze.splice(theMaze.indexOf(sectionImg.mazePiece), 1);
+				/*
+				for (var i = 0; i < theMaze.length; i++)
+				{
+					if (theMaze[i] === sectionImg)
+					{
+						theMaze.splice(i, 1);
+					}
+				}
+				*/
+			}
+		</script>
+	</head>
+	
+	<body onload = "initialize();">
+		<div>
+			<img onclick = "placeSection(this);" src = "images/bottomdeadend.png" />
+			<img onclick = "placeSection(this);" src = "images/cross.png" />
+			<img onclick = "placeSection(this);" src = "images/empty.png" />
+			<img onclick = "placeSection(this);" src = "images/horizontal.png" />
+			<img onclick = "placeSection(this);" src = "images/lbottomleft.png" />
+			<img onclick = "placeSection(this);" src = "images/lbottomright.png" />
+			<img onclick = "placeSection(this);" src = "images/leftdeadend.png" />
+			<img onclick = "placeSection(this);" src = "images/ltopleft.png" />
+			<img onclick = "placeSection(this);" src = "images/ltopright.png" />
+			<img onclick = "placeSection(this);" src = "images/rightdeadend.png" />
+			<img onclick = "placeSection(this);" src = "images/tdown.png" />
+			<img onclick = "placeSection(this);" src = "images/tleft.png" />
+			<img onclick = "placeSection(this);" src = "images/topdeadend.png" />
+			<img onclick = "placeSection(this);" src = "images/tright.png" />
+			<img onclick = "placeSection(this);" src = "images/tup.png" />
+			<img onclick = "placeSection(this);" src = "images/vertical.png" />
+		</div>
+		
+		<hr>
+		
+		<div id = "newimgs">
+			
+		</div>
+		<button onclick = "placeTrap();">Place the Trap</button>
+	</body>
+</html>

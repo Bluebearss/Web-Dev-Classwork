@@ -1,0 +1,306 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Bug Splat</title>
+		<style>
+			body
+			{
+				background-image:url("images/grassbackground.png");
+				color:white;
+				font:bold 24pt calibri;
+			}
+			
+			div, h1, p 
+			{
+				text-align:center; 
+			}
+			
+			img 
+			{
+				padding:5px;
+				width:175px;
+			}
+			
+			span
+			{
+				color:black;
+				padding:15px;
+				background-color:lightgrey;
+			}
+		</style>
+
+		<script type = "text/javascript">
+			function initialize()
+			{
+				// Array storing all the comments instead of an individual variable for each comment
+				
+				commentArray = ["You'll have to do better than that!","Hah!","We will swarm your homeland!","The many legs of the insect world will stampede over your pitiful efforts!","You call that squashing?","We will bathe in the blood of our enemies!","Please!  No more!","Oh, no!  Not Murray!","Retreat!","Have you no mercy?!","My leg!  Is that <i>my</i> leg?","What kind of a monster are you?"];
+				
+				// Array for all the comments used
+				
+				comUsedArray = [];
+				for(var i = 0, i < commentArray.length; i++)
+					comUsedArray[i] = false;
+				
+				// Array for all the Bugs Clicked
+				
+				bugClickedArray = [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false];
+				
+				// Array for all the Bug Image Elements
+				
+				bugElementArray = [document.getElementById("bug1img"),document.getElementById("bug2img"),document.getElementById("bug3img"),document.getElementById("bug4img"),document.getElementById("bug5img"),document.getElementById("bug6img"),document.getElementById("bug7img"),document.getElementById("bug8img"),document.getElementById("bug9img"),document.getElementById("bug10img"),document.getElementById("bug11img"),document.getElementById("bug12img"),document.getElementById("bug13img"),document.getElementById("bug14img"),document.getElementById("bug15img")];
+				
+				messageOut = document.getElementById("messageBox");
+				
+				//Back End Variables
+				splatComment = "You will never defeat us!";
+				numClicks = 0;
+			}
+			
+			/*
+				getSplatComment
+				
+				Determines whether to use a fixed comment or generate a random one.
+			*/
+			function getSplatComment()
+			{
+				//These comments are all fixed by click.
+				if (numClicks % 2 == 1)
+				{
+					if (numClicks == 15)
+						splatComment = "You've killed us all.";
+					else
+						splatComment = "Ouch!";
+				}
+				else
+				{
+					/*
+						The generateRandomComment function returns one of the random comments defined in initialize.  This call stores that comment in the splatComment variable.
+					*/
+					splatComment = generateRandomComment();
+				}
+			}
+			
+			/*
+				generateRandomComment
+				Uses a random number to determine which comment to use.
+				
+				Returns the comment string.
+			*/
+			function generateRandomComment()
+			{
+				/*
+					This loop generates a comment based on whether the user is in the first or second half of the game.
+					
+					The condition calls the function commentIsUsed, which returns a true or false value.  As the caller, we pass in the random number to indicate which comment we want to check.  This loop will continue to run for as long as the function (commentIsUsed) returns true.
+				*/
+				do
+				{
+					if (numClicks < 8)
+						rndNum = parseInt(Math.random() * 6) + 1;
+					else
+						rndNum = parseInt(Math.random() * 6) + 7;
+				} while (commentIsUsed(rndNum));
+				
+				/*
+					Once we've pulled an acceptable comment out of the loop, that comment's "used value" is set to true and the function returns the comment.
+				*/
+				if (rndNum == 1)
+				{
+					com1Used = true;
+					return com1;
+				}
+				
+				if (rndNum == 2)
+				{
+					com2Used = true;
+					return com2;
+				}
+				
+				if (rndNum == 3)
+				{
+					com3Used = true;
+					return com3;
+				}
+				
+				if (rndNum == 4)
+				{
+					com4Used = true;
+					return com4;
+				}
+				
+				if (rndNum == 5)
+				{
+					com5Used = true;
+					return com5;
+				}
+				
+				if (rndNum == 6)
+				{
+					com6Used = true;
+					return com6;
+				}
+				
+				if (rndNum == 7)
+				{
+					com7Used = true;
+					return com7;
+				}
+				
+				if (rndNum == 8)
+				{
+					com8Used = true;
+					return com8;
+				}
+				
+				if (rndNum == 9)
+				{
+					com9Used = true;
+					return com9;
+				}
+				
+				if (rndNum == 10)
+				{
+					com10Used = true;
+					return com10;
+				}
+				
+				if (rndNum == 11)
+				{
+					com11Used = true;
+					return com11;
+				}
+				
+				if (rndNum == 12)
+				{
+					com12Used = true;
+					return com12;
+				}
+			}
+			
+			/*
+				bugAlreadySplatted
+				Checks to see whether a specified bug has been clicked already.
+				
+				Parameters
+				bugClicked:		The image element clicked by the user.
+				
+				Returns
+				The boolean value that corresponds with the image element.
+			*/
+			function bugAlreadySplatted(bugClicked)
+			{
+				/*
+					The if comparison simply tells the computer which boolean to return.
+					
+					The boolean is true or false depending on whether or not the bug has already been clicked.
+				*/
+				if (bugClicked == bug1Image)
+					return bug1Clicked;
+					
+				if (bugClicked == bug2Image)
+					return bug2Clicked;
+
+				if (bugClicked == bug3Image)
+					return bug3Clicked;
+
+				if (bugClicked == bug4Image)
+					return bug4Clicked;
+
+				if (bugClicked == bug5Image)
+					return bug5Clicked;
+
+				if (bugClicked == bug6Image)
+					return bug6Clicked;
+
+				if (bugClicked == bug7Image)
+					return bug7Clicked;
+
+				if (bugClicked == bug8Image)
+					return bug8Clicked;
+
+				if (bugClicked == bug9Image)
+					return bug9Clicked;
+
+				if (bugClicked == bug10Image)
+					return bug10Clicked;
+
+				if (bugClicked == bug11Image)
+					return bug11Clicked;
+
+				if (bugClicked == bug12Image)
+					return bug12Clicked;
+
+				if (bugClicked == bug13Image)
+					return bug13Clicked;
+
+				if (bugClicked == bug14Image)
+					return bug14Clicked;
+
+				if (bugClicked == bug15Image)
+					return bug15Clicked;
+
+				//Default to false.
+				return false;
+			}
+			
+			/*
+				splat
+				Handles the back end work for splatting a bug.
+				
+				Parameters
+				bugClicked:		The image element that the user clicked on.
+				
+			*/
+			function splat(bugIndex)
+			{
+				//If the bug was already splatted, end the function.
+				if (bugClickedArray[bugIndex])
+					return;
+				
+				//Set the appropriate boolean to true to indicate that the bug has now been splatted.
+				bugClickedArray[bugIndex] = true;
+				
+				//Adjust the back end.
+				numClicks++;
+				bugClicked.src = "images/splat.png";
+				
+				//Generate a comment
+				getSplatComment();
+				display();
+			}
+			
+			function display()
+			{
+				messageBox.innerHTML = splatComment;
+			}
+		</script>
+				
+	</head>
+		
+	<body onload = "initialize();">
+		<h1>All Your Bug Are Belong To Us!</h1>
+		<div>
+			<img id = "bug1img" onclick = "splat(0);" src = "images/bug.png" />
+			<img id = "bug2img" onclick = "splat(1);" src = "images/bug.png" />
+			<img id = "bug3img" onclick = "splat(2);" src = "images/bug.png" />
+			<img id = "bug4img" onclick = "splat(3);" src = "images/bug.png" />
+			<img id = "bug5img" onclick = "splat(4);" src = "images/bug.png" />
+		</div>
+		<div>
+			<img id = "bug6img" onclick = "splat(5);" src = "images/bug.png" />
+			<img id = "bug7img" onclick = "splat(6);" src = "images/bug.png" />
+			<img id = "bug8img" onclick = "splat(7);" src = "images/bug.png" />
+			<img id = "bug9img" onclick = "splat(8);" src = "images/bug.png" />
+			<img id = "bug10img" onclick = "splat(9);" src = "images/bug.png" />
+		</div>
+		<div>
+			<img id = "bug11img" onclick = "splat(10);" src = "images/bug.png" />
+			<img id = "bug12img" onclick = "splat(11);" src = "images/bug.png" />
+			<img id = "bug13img" onclick = "splat(12);" src = "images/bug.png" />
+			<img id = "bug14img" onclick = "splat(13);" src = "images/bug.png" />
+			<img id = "bug15img" onclick = "splat(14);" src = "images/bug.png" />
+		</div>
+		<p><span id = "messageBox">You will never defeat us!</span></p>
+	</body>
+</html>

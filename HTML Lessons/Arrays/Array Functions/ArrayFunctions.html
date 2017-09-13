@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<!-- Brian Zhu -->
+<html>
+	<head>
+		<title>Array Functions</title>
+		<style>
+			html
+			{
+				font:bold 24pt calibri;
+			}
+		</style>
+		<script>
+			function initialize()
+			{
+				array = ["red","blue","yellow","green","orange","magenta","blue","cyan","yellow","blue","red"];
+				/*
+				array.push("purple"); <!-- Adds to end of array -->
+				array.unshift("pink"); <!-- Adds to beginning of array -->
+				array.pop(); <!-- Removes from end of array and returns discarded item-->
+				array.shift(); <!-- Removes from beginning of array and returns discarded item -->
+				*/
+				ctr = 0;
+				howManyInArray();
+				alert(ctr);
+			}
+			
+			function howManyInArray()
+			{
+				for (var i = 0; i < array.length; i++)
+				{
+					if (array[i] == "blue")
+						{
+							ctr++;
+						}
+				}
+			}
+			
+			function removeItm()
+			{
+				for (var i = 0; i < array.length; i++)
+				{
+				
+				}
+			}
+		</script>
+	</head>
+	
+	<body onload = "initialize();">
+	
+	</body>
+</html>

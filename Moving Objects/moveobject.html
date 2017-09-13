@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<!-- Brian Zhu -->
+<html onkeydown = "checkKey(event);">
+	<head>
+		<title></title>
+		<style>
+			img
+			{
+				width:10%;
+				position:absolute;
+				top: 10px;
+				left: 10px;
+			}
+		</style>
+		<script>
+			function Moveable(x, y)
+			{
+				this.xCoord = x;
+				this.yCoord = y;
+				
+				this.move = function(dir)
+				{
+					if (dir == LEFT)
+					{
+						this.xCoord--;
+					}
+					
+					if (dir == RIGHT)
+					{
+						this.xCoord++;
+					}
+					
+					if (dir == UP)
+					{
+						this.yCoord--;
+					}
+					
+					if (dir == DOWN)
+					{
+						this.yCoord++;
+					}
+				}
+			}
+			
+			function initialize()
+			{
+				LEFT = 37, UP = 38, RIGHT = 39, DOWN = 40;
+				
+				hangman = new Moveable(10, 10);
+				hangImage = document.getElementById("hang");
+			}
+			
+			function checkKey(e)
+			{
+				hang.move(e.which);
+				display();
+			}
+			
+			function display()
+			{
+				hangImage.style.left = hangman.xCoord + "px";
+				hangImage.style.top = hangman.yCoord + "px";
+			}
+		</script>
+	</head>
+	
+	<body onload = "initialize();">
+		<img id = "hang" src = "images/gallows7.png" />
+	</body>
+</html>

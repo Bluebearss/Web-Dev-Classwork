@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Into The Woods</title>
+		<style>
+			div.bdy
+			{
+				position:fixed;
+				width:100%;
+				top:0px;
+				left:0px;
+				
+				z-index:-1;
+			}
+			
+			div.bdy > img
+			{
+				width:100%;
+				height:100%;
+				position:fixed;
+				top:0px;
+				left:0px;
+			}
+			
+			h1
+			{
+				text-align:center;
+			}
+			
+			li > img
+			{
+				height:40px;
+				display:none;
+			}
+			
+			li div
+			{
+				display:none;
+			}
+			
+			li,span
+			{
+				background-color:#D9ECCA;
+				color:#3E6022;
+				border:2px solid black;
+				list-style-type:none;
+				opacity:0.85;
+				border-radius:12px;
+				box-shadow:8px 8px 5px darkgrey;
+			}
+			
+			li
+			{
+				font-weight:bold;
+				text-align:center;
+				width:175px;
+				height:40px;
+				padding:12px;
+			}
+			
+			span
+			{
+				padding:2px 6px 2px 6px;
+			}
+			
+			li:hover > img
+			{
+				display:inline;
+			}
+			
+			li:hover > div
+			{
+				display:inline;
+				position:relative;
+				left:350px;
+			}
+		</style>
+	</head>
+		
+	<body>
+		<div class = "bdy">
+			<img src = "images/bamboo-forest.jpg" />
+		</div>
+		<h1><span>Welcome to the Bamboo Forest</span></h1><br />
+		
+		<ul>
+			<li>
+				<img src = "images/panda wide eyes.png" />
+				About Forests
+				<div>
+					<img src = "images/Usal-Redwood-Forest.jpg" />
+				</div>
+			</li><br />
+			<li>
+				<img src = "images/panda wide eyes.png" />
+				About Bamboo
+				<div>
+					<img src = "images/bamboo.jpg" />
+				</div>
+			</li><br />
+			<li>
+				<img src = "images/panda wide eyes.png" /> 
+				About Pandas
+				<div>
+					<img src = "images/panda_thumb.jpg" />
+				</div>
+			</li><br />
+		</ul>
+	</body>
+</html>

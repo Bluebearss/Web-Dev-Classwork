@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<!-- Ivan Turner -->
+<html onkeydown = "checkKey(event);">
+	<head>
+		<title></title>
+		<style>
+			img
+			{
+				position:absolute;
+				top:10px;
+				left:10px;
+			}
+		</style>
+		<script>
+			function Moveable(x, y)
+			{
+				this.xCoord = x;
+				this.yCoord = y;
+				
+				this.move = function (dir)
+				{
+					if (dir == LEFT)
+						this.xCoord--;
+						
+					if (dir == RIGHT)
+						this.xCoord++;
+						
+					if (dir == UP)
+						this.yCoord--;
+						
+					if (dir == DOWN)
+						this.yCoord++;
+				}
+			}
+			
+			function initialize()
+			{
+				LEFT = 37, UP = 38, RIGHT = 39, DOWN = 40;
+				beetle = new Moveable(10, 10);
+				beetleImg = document.getElementById("beetle");
+			}
+			
+			function checkKey(e)
+			{
+				beetle.move(e.which);
+				display();
+			}
+			
+			function display()
+			{
+				beetleImg.style.left = beetle.xCoord + "px";
+				beetleImg.style.top = beetle.yCoord + "px";
+			}
+		</script>
+	</head>
+		
+	<body onload = "initialize();">
+		<img src = "insect.png" id = "beetle" />
+	</body>
+</html>

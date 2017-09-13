@@ -1,0 +1,449 @@
+<!DOCTYPE HTML>
+<!-- Brian Zhu -->
+<html>
+	<head>
+		<title></title>
+		<style>
+			body
+			{
+				text-align:center;
+				background-color:orange;
+			}
+			img
+			{
+				height:176px;
+				padding:20px;
+			}
+			h1
+			{
+				font-family:Chiller;
+			}
+		</style>
+		<script>
+			function initialize()
+			{
+				bugOneElement = document.getElementById("bug1");
+				bugTwoElement = document.getElementById("bug2");
+				bugThreeElement = document.getElementById("bug3");
+				bugFourElement = document.getElementById("bug4");
+				bugFiveElement = document.getElementById("bug5");
+				bugSixElement = document.getElementById("bug6");
+				bugSevenElement = document.getElementById("bug7");
+				bugEightElement = document.getElementById("bug8");
+				bugNineElement = document.getElementById("bug9");
+				bugTenElement = document.getElementById("bug10");
+				bugElevenElement = document.getElementById("bug11");
+				bugTwelveElement = document.getElementById("bug12");
+				bugThirteenElement = document.getElementById("bug13");
+				bugFourteenElement = document.getElementById("bug14");
+				bugFifteenElement = document.getElementById("bug15");
+				
+				imageSrc = "";
+				
+				commentArea = document.getElementById("messageoutput");
+				
+				numberBugsKilled = 0;
+				
+				bugOneKilled = false;
+				bugTwoKilled = false;
+				bugThreeKilled = false;
+				bugFourKilled = false;
+				bugFiveKilled = false;
+				bugSixKilled = false;
+				bugSevenKilled = false;
+				bugEightKilled = false;
+				bugNineKilled = false;
+				bugTenKilled = false;
+				bugElevenKilled = false;
+				bugTwelveKilled = false;
+				bugThirteenKilled = false;
+				bugFourteenKilled = false;
+				bugFifteenKilled = false;
+				
+
+				commentTwo = false;
+				commentFour = false;
+				commentSix = false;
+				commentEight = false;
+				commentTen = false;
+				commentTwelve = false;
+				commentFourteen = false;
+			}
+			
+			function commentConditions()
+			{
+				if (numberBugsKilled == 15)
+				{
+					commentArea.innerHTML = "You've killed us all.";
+					return;
+				}
+				
+				if ((numberBugsKilled % 2) - 1 == 0)
+				{
+					commentArea.innerHTML = "Ouch!";
+					return;
+				}
+				
+				if (numberBugsKilled <= 8)
+				{
+					var arrayNumbers = [2,4,6,8];
+					
+					var randomNumber = arrayNumbers[Math.floor(Math.random() * arrayNumbers.length)];
+					
+					while (randomNumber == 2 && commentTwo == true)
+					{
+						randomNumber = arrayNumbers[Math.floor(Math.random() * arrayNumbers.length)];
+					}
+					
+					while (randomNumber == 4 && commentFour == true)
+					{
+						randomNumber = arrayNumbers[Math.floor(Math.random() * arrayNumbers.length)];
+					}
+					
+					while (randomNumber == 6 && commentSix == true)
+					{
+						randomNumber = arrayNumbers[Math.floor(Math.random() * arrayNumbers.length)];
+					}
+					
+					while (randomNumber == 8 && commentEight == true)
+					{
+						randomNumber = arrayNumbers[Math.floor(Math.random() * arrayNumbers.length)];
+					}
+					
+					
+					if (randomNumber == 2)
+					{
+						commentTwo = true;
+						commentArea.innerHTML = "Stop hitting us!";
+					}
+					
+					if (randomNumber == 4)
+					{
+						commentFour = true;
+						commentArea.innerHTML = "You will regret this!";
+					}
+					
+					if (randomNumber == 6)
+					{
+						commentSix = true;
+						commentArea.innerHTML = "Our numbers are falling!";
+					}
+					
+					if (randomNumber == 8)
+					{
+						commentEight = true;
+						commentArea.innerHTML = "Please Stop! We have done nothing to you random splatter!";
+					}
+				}
+				
+				if (numberBugsKilled > 8)
+				{
+					var arrayNumbers = [10,12,14];
+					
+					var randomNumber = arrayNumbers[Math.floor(Math.random() * arrayNumbers.length)];
+					
+					while (randomNumber == 10 && commentTen == true)
+					{
+						randomNumber = arrayNumbers[Math.floor(Math.random() * arrayNumbers.length)];
+					}
+					
+					while (randomNumber == 12 && commentTwelve == true)
+					{
+						randomNumber = arrayNumbers[Math.floor(Math.random() * arrayNumbers.length)];
+					}
+					
+					while (randomNumber == 14 && commentFourteen == true)
+					{
+						randomNumber = arrayNumbers[Math.floor(Math.random() * arrayNumbers.length)];
+					}
+					
+					if (randomNumber == 10)
+					{
+						commentTen = true;
+						commentArea.innerHTML = "Our numbers are getting significantly low! I beg you to stop this madness!";
+					}
+					
+					if (randomNumber == 12)
+					{
+						commentTwelve = true;
+						commentArea.innerHTML = "We are pleading for mercy here! End this mass murder!";
+					}
+					
+					if (randomNumber == 14)
+					{
+						commentFourteen = true;
+						commentArea.innerHTML = "We are all almost gone! Please spare us! I'll give you anything!";
+					}
+				}
+			}
+			
+			function bugOneDeath()
+			{
+				if (bugOneKilled == false)
+				{
+					bugOneKilled == true;
+					numberBugsKilled += 1;
+					bugOneElement.src = "images/bloodsplat.png";
+
+				}
+				
+				commentConditions();
+			}
+			
+			function bugTwoDeath()
+			{
+				if (bugTwoKilled == false)
+				{
+					bugTwoKilled == true;
+					numberBugsKilled += 1;
+					bugTwoElement.src = "images/bloodsplat.png";
+				}
+				
+				commentConditions();
+			}
+			
+			function bugThreeDeath()
+			{
+				if (bugThreeKilled == false)
+				{
+					bugThreeKilled == true;
+					numberBugsKilled += 1;
+					bugThreeElement.src = "images/bloodsplat.png";
+				}
+				
+				commentConditions();
+			}
+			
+			function bugFourDeath()
+			{
+				if (bugFourKilled == false)
+				{
+					bugFourKilled == true;
+					numberBugsKilled += 1;
+					bugFourElement.src = "images/bloodsplat.png";
+				}
+				
+				commentConditions();
+				
+			}
+			
+			function bugFiveDeath()
+			{
+				if (bugFiveKilled == false)
+				{
+					bugFiveKilled == true;
+					numberBugsKilled += 1;
+					bugFiveElement.src = "images/bloodsplat.png";
+				}
+				
+					
+				commentConditions();
+			}
+			
+			function bugSixDeath()
+			{
+				if (bugSixKilled == false)
+				{
+					bugSixKilled == true;
+					numberBugsKilled += 1;
+					bugSixElement.src = "images/bloodsplat.png";
+				}
+				
+				
+				commentConditions();
+			}
+			
+			function bugSevenDeath()
+			{
+				if (bugSevenKilled == false)
+				{
+					bugSevenKilled == true;
+					numberBugsKilled += 1;
+					bugSevenElement.src = "images/bloodsplat.png";
+				}
+				
+				commentConditions();
+			}
+			
+			function bugEightDeath()
+			{
+				if (bugEightKilled == false)
+				{
+					bugEightKilled == true;
+					numberBugsKilled += 1;
+					bugEightElement.src = "images/bloodsplat.png";
+				}
+				
+				commentConditions();
+			}
+			
+			function bugNineDeath()
+			{
+				if (bugNineKilled == false)
+				{
+					bugNineKilled == true;
+					numberBugsKilled += 1;
+					bugNineElement.src = "images/bloodsplat.png";
+				}
+				
+				commentConditions();
+			}
+			
+			function bugTenDeath()
+			{
+				if (bugTenKilled == false)
+				{
+					bugTenKilled == true;
+					numberBugsKilled += 1;
+					bugTenElement.src = "images/bloodsplat.png";
+				}
+				
+				commentConditions();
+			}
+			
+			function bugElevenDeath()
+			{
+				if (bugElevenKilled == false)
+				{
+					bugElevenKilled == true;
+					numberBugsKilled += 1;
+					bugElevenElement.src = "images/bloodsplat.png";
+				}
+				
+				commentConditions();
+			}
+			
+			function bugTwelveDeath()
+			{
+				if (bugTwelveKilled == false)
+				{
+					bugTwelveKilled == true;
+					numberBugsKilled += 1;
+					bugTwelveElement.src = "images/bloodsplat.png";
+				}
+				
+				commentConditions();
+			}
+			
+			function bugThirteenDeath()
+			{
+				if (bugThirteenKilled == false)
+				{
+					bugThirteenKilled == true;
+					numberBugsKilled += 1;
+					bugThirteenElement.src = "images/bloodsplat.png";
+				}
+				
+				commentConditions();
+			}
+			
+			function bugFourteenDeath()
+			{
+				if (bugFourteenKilled == false)
+				{
+					bugFourteenKilled == true;
+					numberBugsKilled += 1;
+					bugFourteenElement.src = "images/bloodsplat.png";
+				}
+				
+				commentConditions();
+			}
+			
+			function bugFifteenDeath()
+			{
+				if (bugFifteenKilled == false)
+				{
+					bugFifteenKilled == true;
+					numberBugsKilled += 1;
+					bugFifteenElement.src = "images/bloodsplat.png";
+				}
+				
+				commentConditions();
+			}
+			
+		</script>
+	</head>
+	
+	<body onload = "initialize();">
+		<h1>
+			BUG SPLAT!
+		</h1>
+		<div>
+			<span>
+				<img id = "bug1" onclick = "bugOneDeath();" src = "images/bug.jpg" />
+			</span>
+			
+			<span>
+				<img id = "bug2" onclick = "bugTwoDeath();" src = "images/bug.jpg" />
+			</span>
+			
+			<span>
+				<img id = "bug3" onclick = "bugThreeDeath();" src = "images/bug.jpg" />
+			</span>
+		
+			<span>
+				<img id = "bug4" onclick = "bugFourDeath();" src = "images/bug.jpg" />
+			</span>
+			
+			<span>
+				<img id = "bug5" onclick = "bugFiveDeath();" src = "images/bug.jpg" />
+			</span>
+		</div>
+		
+		<br />
+		
+		<div>
+			<span>
+				<img id = "bug6" onclick = "bugSixDeath();" src = "images/bug.jpg" />
+			</span>
+			
+			<span>
+				<img id = "bug7" onclick = "bugSevenDeath();" src = "images/bug.jpg" />
+			</span>
+			
+			<span>
+				<img id = "bug8" onclick = "bugEightDeath();" src = "images/bug.jpg" />
+			</span>
+			
+			<span>
+				<img id = "bug9" onclick = "bugNineDeath();" src = "images/bug.jpg" />
+			</span>
+			
+			<span>
+				<img id = "bug10" onclick = "bugTenDeath();" src = "images/bug.jpg" />
+			</span>
+		</div>
+		
+		<br />
+		
+		<div>
+			<span>
+				<img id = "bug11" onclick = "bugElevenDeath();" src = "images/bug.jpg" />
+			</span>
+			
+			<span>
+				<img id = "bug12" onclick = "bugTwelveDeath();" src = "images/bug.jpg" />
+			</span>
+		
+			<span>
+				<img id = "bug13" onclick = "bugThirteenDeath();" src = "images/bug.jpg" />
+			</span>
+			
+			<span>
+				<img id = "bug14" onclick = "bugFourteenDeath();" src = "images/bug.jpg" />
+			</span>
+			
+			<span>
+				<img id = "bug15" onclick = "bugFifteenDeath();" src = "images/bug.jpg" />
+			</span>
+		</div>
+		
+		<br />
+		
+		<br />
+		
+		<h1 id = "messageoutput">
+			You will never defeat us!
+		</h1>
+	</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE HTML>
+<!-- Brian Zhu -->
+<!--
+	The purpose of this exercise is to demonstrate the use of a while or do-while loop.
+	
+	The computer has 3 items (5 of each) in its inventory.  As the Add Item button is clicked, those items are removed from inventory and added to a list of selected items.  The computer must be aware of which items have been selected so that it does not select an item it has run out of.
+-->
+<html>
+	<head>
+		<title>Taking Random Items</title>
+		<style>
+			body, button
+			{
+				font: 24pt comic sans ms;
+			}
+			
+			div, p
+			{
+				text-align:center;
+			}
+			
+			span
+			{
+				padding:10px;
+			}
+		</style>
+		<script src = "utilities.js"></script>
+		<script>
+			function initialize()
+			{
+				//Constants for use within the program
+				LOWER = 0, UPPER = 2;
+				NONE = -1, TWINE = 0, RUBBER_BAND = 1, SKITTLE = 2;
+			
+				//HTML element variables
+				twineOutput = document.getElementById("twineqty");
+				rubberBandOutput = document.getElementById("bandqty");
+				skittleOutput = document.getElementById("skittleqty");
+				
+				listOutput = document.getElementById("listout");
+				
+				addButton = document.getElementById("addbtn");
+				
+				//Back end inventory variables.
+				twine = 5;
+				rubberBand = 5;
+				skittle = 5;
+				
+				/*
+					The listOutput element will be updated with the new version of the list during every display.  In order to keep the title, which has been embedded in the list, I've initialized the list to hold whatever's in the HTML already.
+				*/
+				myList = listOutput.innerHTML;
+			}
+			
+			/*
+				addRandomItem
+				
+				Performs the main action of adding the selected item to the list.
+			*/
+			function addRandomItem()
+			{
+				/*
+					selItem is a LOCAL variable representing the item being pulled from inventory and added to the list.
+					
+					The var designation indicates that the variable exists only in this function.  Referencing the variable elsewhere in the program will generate an "undefined" error.  Assigning a value to it elsewhere in the program will create a different variable with the same name.
+				*/
+				var selItem = getSelectedItem();
+				
+				/*
+					selItem is passed into 2 separate functions.  The value of selItem is copied into the parameters of these functions during the function call.  Though you can pass in the function call itself, each call runs the function and generates a different value.  Only by storing the value from a single call in a variable can we be assured of always having synchronized information.
+				*/
+				updateInventory(selItem);
+				myList += getItemString(selItem);
+				
+				
+				//...and display...
+				display();
+			}
+			
+			/*
+				updateInventory
+				
+				Removes an item from the computer's inventory.
+				
+				Parameters:
+					itm:	The numeric constant that represents the item being removed.
+			*/
+			function updateInventory(itm)
+			{
+				if (itm == TWINE)
+					twine--;
+					
+				if (itm == RUBBER_BAND)
+					rubberBand--;
+					
+				if (itm == SKITTLE)
+					skittle--;
+			}
+
+			/*
+				getItemString
+				
+				Returns a string representation of an item in the computer's inventory.
+				
+				Paramters:
+					itm:	The numeric constant of the item being represented.
+					
+				Returns:
+					A string representing the item.
+			*/
+			function getItemString(itm)
+			{
+				/*
+					The <br /> has been inserted into the string so that it will go to the next line after each item is represented.
+					
+					HTML code is text and can be inserted into any string, HOWEVER, adding more complex HTML elements in this way is NOT recommended.
+				*/
+				if (itm == TWINE)
+					return "Twine<br />";
+					
+				if (itm == RUBBER_BAND)
+					return "Rubber Band<br />";
+					
+				if (itm == SKITTLE)
+					return "Skittle<br />";
+					
+				return "";
+			}
+			
+			/*
+				getSelectedItem
+				
+				Chooses a random item from the computer's inventory.
+				
+				Returns:
+					A ranom item from the inventory represented as a numeric constant.
+			*/
+			function getSelectedItem()
+			{
+				/*
+					This function requires a loop in order to make sure that the selected item is not out of stock.  Many loops require a check beforehand to make sure the loop is necessary (and not dangerous).
+					
+					In this case, if the computer's inventory is empty, it cannot select any items and we shouldn't try.
+				*/
+				if (twine == 0 && rubberBand == 0 && skittle == 0)
+					return NONE;
+				
+				/*
+					There are 2 kinds of while loops.
+					
+					while (condition)
+					{
+						code;
+					}
+					
+					do
+					{
+						code;
+					} while (condition);
+					
+					The two can be used interchangeably with slight modifications to the code, but it's much easier to program a do...while if your loop needs to execute AT LEAST ONCE.  If there is a possibility your loop can be skipped entirely, stick with a while...
+					
+					When writing a loop, you need to determine your condition.  This may not be immediately apparent.  Sometimes, if you know you need a loop, coding the inside of the loop can give you clues about what the condition should be.  When do you want the loop to stop?
+					
+					Part of the code inside the loop must take the condition into account.  You must write code that can change the circumstances so that the condition eventually becomes false.  The infinite loop is the most common mistake when just starting out.
+				*/
+				do
+				{
+					/*
+						Put a random item into the variable.  This random item cannot be NONE so that the loop will automatically end unless one of the following conditions proves true.
+						
+						Side Note - itm has been designated as a local variable through the use of the keyword var.
+					*/
+					var itm = getRandomInteger(LOWER, UPPER);
+					
+					/*
+						If any one of the following conditions proves true, the itm will be reset to NONE and the loop will perform another iteration.
+						
+						These conditions are set to trigger if the selected item is out of stock.
+					*/
+					if (itm == TWINE && twine <= 0)
+						itm = NONE;
+						
+					if (itm == RUBBER_BAND && rubberBand <= 0)
+						itm = NONE;
+						
+					if (itm == SKITTLE && skittle <= 0)
+						itm = NONE;
+				} while(itm == NONE);
+				
+				/*
+					Once the loop ends, it means that a legitimate item has been selected and can be returned.
+				*/
+				return itm;
+			}
+			
+			function display()
+			{
+				if (twine == 0 && rubberBand == 0 && skittle == 0)
+					addButton.disabled = true;
+				
+				twineOutput.innerHTML = twine;
+				rubberBandOutput.innerHTML = rubberBand;
+				skittleOutput.innerHTML = skittle;
+				
+				listOutput.innerHTML = myList;
+			}
+		</script>
+	</head>
+		
+	<body onload = "initialize();">
+		<p>
+			<span>Twine:<span id = "twineqty">5</span></span>
+			<span>Rubber Bands:<span id = "bandqty">5</span></span>
+			<span>Skittles:<span id = "skittleqty">5</span></span>
+		</p>
+		<div><button id = "addbtn" onclick = "addRandomItem();">Add Item</button></div>
+		<div id = "listout">Item List<br /></div>
+	</body>
+</html>

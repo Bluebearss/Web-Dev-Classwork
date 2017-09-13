@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<!-- Brian Zhu -->
+<html>
+	<head>
+		<title></title>
+		<style>
+			img
+			{
+				display:none;
+			}
+		</style>
+		<script>
+			function initialize()
+			{
+				func1 = myFunc;
+				func1();
+			}
+			
+			function myFunc()
+			{
+				alert("function called");
+			}
+			
+			function Superhero(n,c)
+			{
+				this.superheroName = n;
+				this.superheroCity = c;
+				this.superheroReputation = 0;
+				this.adventures = [];
+				
+				this.haveAdventure = function(adv)
+				{
+					this.adventures.push(adv);
+				}
+			}
+		</script>
+	</head>
+	
+	<body onload = "initialize();">
+		<span>Mr. Trumperino</span>
+		
+		<span>Mr. Trumperino goes on many adventures while protecting the city of One Million Dollars:</span>
+		<!--
+		<h2>
+			Mr. Trumperino is known for protecting the city with his poisonous yellow hair. Although  a good man on the outside, he is known to terrorize every other person besides those that are also millionaires.
+		</h2>
+		-->
+		
+		<span>Change your Name:<input type = "text" /></span>
+		<span>Move to a New City:<input type = "text" /></span>
+		<span>Describe your Latest Adventure:<input type = "text" /></span>
+		<img src = "images/trump.png" />
+	</body>
+</html>

@@ -1,0 +1,31 @@
+BTHS                                                           Brian Zhu
+Turner-Period 1                                                2/12/16
+                   Small Application Plan-Black and Red
+
+On the webpage, it will display 10 black tokens and 10 red tokens for both
+
+the player and the computer which are just numbers on screen. There will 
+
+also display 2 buttons on which the player can roll the red die and can 
+
+roll the black die. It will then show up the number of red on the red die
+
+and black on the black die. Then, the player will choose an option of the
+
+4 possibilities to interact with the page. This will also be 4 buttons 
+
+which can be clicked. This can be shown by changing the numbers on screen.
+
+These buttons will be hided when the page first loads up. 
+
+The computer will then make a selection. The black and red dice will be
+
+rolled randomly, displaying a random numbers from 1 - 6 on each dice. The
+
+opponent will then choose his strategy randomly, with a 25% chance for
+
+each strategy to be chosen. The appropriate numbers will then update on
+
+screen. The computer's turn is initiated by a button click on screen. This
+
+allows the player to see the computer's decision.

@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<!-- Brian Zhu -->
+<html>
+	<head>
+		<title></title>
+		<style></style>
+		<script>
+			function initialize()
+			{
+				myTbl = document.getElementById("mytable");
+				txtBoxOne = document.getElementById("textbox1");
+				txtBoxTwo = document.getElementById("textbox2");
+				txtBoxThree = document.getElementById("textbox3");
+				
+				numRows = 0;
+				
+				txtBoxOne = ;
+				txtBoxTwo = ;
+				txtBoxThree = ;
+				
+			}
+			
+			function addRowToTable()
+			{
+				numRows++;
+				newRow = myTbl.insertRow();
+				addCellToRow(newRow, 1);
+				addCellToRow(newRow, 2);
+			}
+			
+			function addCellToRow(theRow, cellNum)
+			{
+				newCell = theRow.insertCell();
+				newCell.innerHTML = "row " + numRows + ", col " + cellNum;
+			}
+			
+			function display()
+			{
+				txtBoxOne.innerHTML = "row " + numRows + ", col " + 1;
+				txtBoxTwo.innerHTML = "row " + numRows + ", col " + 2;
+			}
+		</script>
+	</head>
+	
+	<body onload = "initialize();">
+		<table id = "mytable">
+			<tr>
+				<th>
+					My Dynamic Table
+					<button onclick = "addRowToTable();">Add Rows</button>
+				</th>
+			</tr>
+		</table>
+		
+		<input id = "textbox1" type = "text" />
+		
+		<input id = "textbox2" type = "text" />
+		
+		<input id = "textbox3" type = "text" />
+	</body>
+</html>

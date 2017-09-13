@@ -1,0 +1,425 @@
+<!DOCTYPE HTML>
+<!-- Brian Zhu -->
+<html>
+	<head>
+		<title></title>
+		<style>
+			h1
+			{
+				text-align:center;
+			}
+			table
+			{
+				margin:auto;
+			}
+			body
+			{
+				background-color:dodgerblue;
+				text-align:center;
+			}
+			button
+			{
+				background-color:crimson;
+				font-family:impact;
+				font-size:20pt;
+			}
+			h1
+			{
+				font-family:impact;
+			}
+			div
+			{
+				font-family:impact;
+				font-size:20pt;
+			}
+		</style>
+		<script src = "utilities.js"></script>
+		<script>
+			function initialize()
+			{
+				smOneElement = document.getElementById("smone");
+				smTwoElement = document.getElementById("smtwo");
+				smThreeElement = document.getElementById("smthree");
+				smFourElement = document.getElementById("smfour");
+				smFiveElement = document.getElementById("smfive");
+				smSixElement = document.getElementById("smsix");
+				smSevenElement = document.getElementById("smseven");
+				smEightElement = document.getElementById("smeight");
+				smNineElement = document.getElementById("smnine");
+				smTenElement = document.getElementById("smten");
+				smElevenElement = document.getElementById("smeleven");
+				smTwelveElement = document.getElementById("smtwelve");
+				smThirteenElement = document.getElementById("smthirteen");
+				smFourteenElement = document.getElementById("smfourteen");
+				smFifteenElement = document.getElementById("smfifteen");
+				smSixteenElement = document.getElementById("smsixteen");
+				
+				cellOneElement = document.getElementById("cellone");
+				cellTwoElement = document.getElementById("celltwo");
+				cellThreeElement = document.getElementById("cellthree");
+				cellFourElement = document.getElementById("cellfour");
+				cellFiveElement = document.getElementById("cellfive");
+				cellSixElement = document.getElementById("cellsix");
+				cellSevenElement = document.getElementById("cellseven");
+				cellEightElement = document.getElementById("celleight");
+				cellNineElement = document.getElementById("cellnine");
+				cellTenElement = document.getElementById("cellten");
+				cellElevenElement = document.getElementById("celleleven");
+				cellTwelveElement = document.getElementById("celltwelve");
+				cellThirteenElement = document.getElementById("cellthirteen");
+				cellFourteenElement = document.getElementById("cellfourteen");
+				cellFifteenElement = document.getElementById("cellfifteen");
+				cellSixteenElement = document.getElementById("cellsixteen");
+				
+				messageElement = document.getElementById("winnerMessage")
+				
+				buttonElement = document.getElementById("button");
+				buttonElement.disabled = false;
+				
+				imageOne = false;
+				imageTwo = false;
+				imageThree = false;
+				imageFour = false;
+				imageFive = false;
+				imageSix = false;
+				imageSeven = false;
+				imageEight = false;
+				imageNine = false;
+				imageTen = false;
+				imageEleven = false;
+				imageTwelve = false;
+				imageThirteen = false;
+				imageFourteen = false;
+				imageFifteen = false;
+				imageSixteen = false;
+				
+				typeImage = 0;
+				
+				numClicks = 0;
+				
+				firstSelected = "";
+				secondSelected = "";
+				
+				cellOneConstant = smOneElement.src;
+				cellTwoConstant = smTwoElement.src;
+				cellThreeConstant = smThreeElement.src;
+				cellFourConstant = smFourElement.src;
+				cellFiveConstant = smFiveElement.src;
+				cellSixConstant = smSixElement.src;
+				cellSevenConstant = smSevenElement.src;
+				cellEightConstant = smEightElement.src;
+				cellNineConstant = smNineElement.src;
+				cellTenConstant = smTenElement.src;
+				cellElevenConstant = smElevenElement.src;
+				cellTwelveConstant = smTwelveElement.src;
+				cellThirteenConstant = smThirteenElement.src;
+				cellFourteenConstant = smFourteenElement.src;
+				cellFifteenConstant = smFifteenElement.src;
+				cellSixteenConstant = smSixteenElement.src;
+			}
+			
+			function imageDetermination ()
+			{
+				typeImage += 1;
+				
+				if (typeImage == 1)
+				{
+					return "images/sm1.png";
+				}
+				
+				if (typeImage == 2)
+				{
+					return "images/sm2.png";
+				}
+				
+				if (typeImage == 3)
+				{
+					return "images/sm3.png";
+				}
+				
+				if (typeImage == 4)
+				{
+					return "images/sm4.png";
+				}
+				
+				if (typeImage == 5)
+				{
+					return "images/sm5.png";
+				}
+				
+				if (typeImage == 6)
+				{
+					return "images/sm6.png";
+				}
+				
+				if (typeImage == 7)
+				{
+					return "images/sm7.png";
+				}
+				
+				if (typeImage == 8)
+				{
+					return "images/sm8.png";
+				}
+				
+				if (typeImage == 9)
+				{
+					return "images/sm9.png";
+				}
+				
+				if (typeImage == 10)
+				{
+					return "images/sm10.png";
+				}
+				
+				if (typeImage == 11)
+				{
+					return "images/sm11.png";
+				}
+				
+				if (typeImage == 12)
+				{
+					return "images/sm12.png";
+				}
+				
+				if (typeImage == 13)
+				{
+					return "images/sm13.png";
+				}
+				
+				if (typeImage == 14)
+				{
+					return "images/sm14.png";
+				}
+				
+				if (typeImage == 15)
+				{
+					return "images/sm15.png";
+				}
+				
+				if (typeImage == 16)
+				{
+					return "images/sm16.png";
+				}
+			}
+			
+			function shuffle()
+			{
+				while (typeImage < 16)
+				{
+					picNum = getRandomInteger(1,16);
+					
+					while((picNum == 1 && imageOne == true) || (picNum == 2 && imageTwo == true) || (picNum == 3 && imageThree == true) || (picNum == 4 && imageFour == true) || (picNum == 5 && imageFive == true) || (picNum == 6 && imageSix == true) || (picNum == 7 && imageSeven == true) || (picNum == 8 && imageEight == true) || (picNum == 9 && imageNine == true) || (picNum == 10 && imageTen == true) || (picNum == 11 && imageEleven == true) || (picNum == 12 && imageTwelve == true) || (picNum == 13 && imageThirteen == true) || (picNum == 14 && imageFourteen == true) || (picNum == 15 && imageFifteen == true) || (picNum == 16 && imageSixteen == true))
+					{
+						picNum = getRandomInteger(1,16);
+					}
+						
+					if (picNum == 1 && imageOne == false)
+					{
+						smOneElement.src = imageDetermination();
+						
+						imageOne = true;
+					}
+					
+					if (picNum == 2 && imageTwo == false)
+					{
+						smTwoElement.src = imageDetermination();
+						
+						imageTwo = true;
+					}
+					
+					if (picNum == 3 && imageThree == false)
+					{
+						smThreeElement.src = imageDetermination();
+						
+						imageThree = true;
+					}
+					
+					if (picNum == 4 && imageFour == false)
+					{
+						smFourElement.src = imageDetermination();
+						
+						imageFour = true;
+					}
+						
+					if (picNum == 5 && imageFive == false)
+					{
+						smFiveElement.src = imageDetermination();
+						
+						imageFive = true;
+					}
+						
+					if (picNum == 6 && imageSix == false)
+					{
+						smSixElement.src = imageDetermination();
+						
+						imageSix = true;
+					}
+						
+					if (picNum == 7 && imageSeven == false)
+					{
+						smSevenElement.src = imageDetermination();
+						
+						imageSeven = true;
+					}
+						
+					if (picNum == 8 && imageEight == false)
+					{
+						smEightElement.src = imageDetermination();
+						
+						imageEight = true;
+					}
+						
+					if (picNum == 9 && imageNine == false)
+					{
+						smNineElement.src = imageDetermination();
+						
+						imageNine = true;
+					}
+						
+					if (picNum == 10 && imageTen == false)
+					{
+						smTenElement.src = imageDetermination();
+						
+						imageTen = true;
+					}
+						
+					if (picNum == 11 && imageEleven == false)
+					{
+						smElevenElement.src = imageDetermination();
+						
+						imageEleven = true;
+					}
+					
+					if (picNum == 12 && imageTwelve == false)
+					{
+						smTwelveElement.src = imageDetermination();
+						
+						imageTwelve = true;
+					}
+					
+					if (picNum == 13 && imageThirteen == false)
+					{
+						smThirteenElement.src = imageDetermination();
+							
+						imageThirteen = true;
+					}
+						
+					if (picNum == 14 && imageFourteen == false)
+					{
+						smFourteenElement.src = imageDetermination();
+						
+						imageFourteen = true;
+					}
+						
+					if (picNum == 15 && imageFifteen == false)
+					{
+						smFifteenElement.src = imageDetermination();
+						
+						imageFifteen = true;
+					}
+					
+					if (picNum == 16 && imageSixteen == false)
+					{
+						smSixteenElement.src = imageDetermination();
+						
+						imageSixteen = true;
+					}
+					
+				}
+				
+				buttonElement.disabled = true;
+			}
+			
+			function swapImages(clickedImage, highlightedImage)
+			{
+				if (buttonElement.disabled == true)
+				{	
+					if (numClicks == 0)
+					{
+						numClicks += 1;
+						firstSelected = clickedImage;
+						firstCellSrc = clickedImage.src;
+						highlightedImage.style.backgroundColor = "green";
+						firstImage = highlightedImage;
+					}
+					else
+					{
+						numClicks = 0;
+						secondCellSrc = clickedImage.src;
+						clickedImage.src = firstCellSrc;
+						firstSelected.src = secondCellSrc;
+						firstImage.style.backgroundColor = "";
+					}
+				}
+				
+				if (buttonElement.disabled == false)
+				{
+					return;
+				}
+				
+				winnerCondition();
+			}
+			
+			function winnerCondition()
+			{
+				if (smOneElement.src == cellOneConstant && smTwoElement.src == cellTwoConstant && smThreeElement.src == cellThreeConstant && smFourElement.src == cellFourConstant && smFiveElement.src == cellFiveConstant && smSixElement.src == cellSixConstant && smSevenElement.src == cellSevenConstant && smEightElement.src == cellEightConstant && smNineElement.src == cellNineConstant && smTenElement.src == cellTenConstant && smElevenElement.src == cellElevenConstant && smTwelveElement.src == cellTwelveConstant && smThirteenElement.src == cellThirteenConstant && smFourteenElement.src == cellFourteenConstant && smFifteenElement.src == cellFifteenConstant && smSixteenElement.src == cellSixteenConstant)
+				{
+					messageElement.innerHTML = "Congratulations! You are the SpiderMan Puzzle Master!";
+				}
+			}
+		</script>
+	</head>
+	
+	<body onload = "initialize();">
+		<h1>
+			Spiderman Puzzle!
+		</h1>
+		
+		<table>
+			<tr>
+				<td id = "cellone"> <img id = "smone" src = "images/sm1.png" onclick = "swapImages(smOneElement, cellOneElement);" /> </td>
+				
+				<td id = "celltwo"> <img id = "smtwo" src = "images/sm2.png" onclick = "swapImages(smTwoElement, cellTwoElement);" /> </td>
+				
+				<td id = "cellthree"> <img id = "smthree" src = "images/sm3.png" onclick = "swapImages(smThreeElement, cellThreeElement);" /> </td>
+				
+				<td id = "cellfour"> <img id = "smfour" src = "images/sm4.png" onclick = "swapImages(smFourElement, cellFourElement);" /> </td>
+			</tr>
+			
+			<tr>
+				<td id = "cellfive"> <img id = "smfive" src = "images/sm5.png" onclick = "swapImages(smFiveElement, cellFiveElement);" /> </td>
+				
+				<td id = "cellsix"> <img id = "smsix" src = "images/sm6.png" onclick = "swapImages(smSixElement, cellSixElement);" /> </td>
+				
+				<td id = "cellseven"> <img id = "smseven" src = "images/sm7.png" onclick = "swapImages(smSevenElement, cellSevenElement);" /> </td>
+				
+				<td id = "celleight"> <img id = "smeight" src = "images/sm8.png" onclick = "swapImages(smEightElement, cellEightElement);" /> </td>
+			</tr>
+			
+			<tr>
+				<td id = "cellnine"> <img id = "smnine" src = "images/sm9.png" onclick = "swapImages(smNineElement, cellNineElement);" /> </td>
+				
+				<td id = "cellten"> <img id = "smten" src = "images/sm10.png" onclick = "swapImages(smTenElement, cellTenElement);" /> </td>
+				
+				<td id = "celleleven"> <img id = "smeleven" src = "images/sm11.png" onclick = "swapImages(smElevenElement, cellElevenElement);" /> </td>
+				
+				<td id = "celltwelve"> <img id = "smtwelve" src = "images/sm12.png" onclick = "swapImages(smTwelveElement, cellTwelveElement);" /> </td>
+			</tr>
+			
+			<tr>
+				<td id = "cellthirteen"> <img id = "smthirteen" src = "images/sm13.png" onclick = "swapImages(smThirteenElement, cellThirteenElement);" /> </td>
+				
+				<td id = "cellfourteen"> <img id = "smfourteen" src = "images/sm14.png" onclick = "swapImages(smFourteenElement, cellFourteenElement);" /> </td>
+				
+				<td id = "cellfifteen"> <img id = "smfifteen" src = "images/sm15.png" onclick = "swapImages(smFifteenElement, cellFifteenElement);" /> </td>
+				
+				<td id = "cellsixteen"> <img id = "smsixteen" src = "images/sm16.png" onclick = "swapImages(smSixteenElement, cellSixteenElement);" /> </td>
+			</tr>
+		</table>
+		
+		<button id = "button" onclick = "shuffle();">Click to Shuffle the Puzzle!</button>
+		<div id = "winnerMessage">
+		</div>
+	</body>
+</html>

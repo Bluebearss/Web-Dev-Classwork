@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<!-- Brian Zhu -->
+<html>
+	<head>
+		<title>Booleans and Conditionals</title>
+		
+		<style>
+			div, button
+			{
+				font-size:24pt;
+			}
+		</style>
+		
+		<script>
+			function initialize()
+			{
+				styledTextElement = document.getElementById("mytext");
+				
+				isBold = false;
+				isItalic = false;
+			}
+			
+			function toggleBold()
+			{
+				isBold = !isBold;
+				display();
+			}
+			
+			function toggleItalics()
+			{
+				isItalic = !isItalic;
+				display();
+			}
+			
+			function display()
+			{
+				if(isBold)
+				{
+					styledTextElement.style.fontWeight = "bold";
+				}
+				else
+				{
+					styledTextElement.style.fontWeight = "normal";
+				}
+				
+				if(isItalic)
+				{
+					styledTextElement.style.fontStyle = "italic";
+				}
+				else
+				{
+					styledTextElement.style.fontStyle = "normal";
+				}
+			}
+		</script>
+	</head>
+		
+	<body onload = "initialize();">
+		<div id = "mytext">
+			I can be italicized or bolded...or not.
+		</div>
+		<hr />
+		<p>
+			<button onclick = "toggleItalics();">Toggle Italics</button> 
+			<---> 
+			<button onclick = "toggleBold();">Toggle Bold</button>
+		</p>
+	</body>
+</html>

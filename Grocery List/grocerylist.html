@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<!-- Brian Zhu -->
+<html>
+	<head>
+		<title></title>
+		<style>
+		</style>
+		<script>
+			function initialize()
+			{
+				groceryItmElement = document.getElementById("groceryitm");
+				listElement = document.getElementById("list");
+				moveItmElement = document.getElementById("editedindex");
+				
+				listOutput = [];
+			}
+			
+			function addItem()
+			{
+				var itm = groceryItmElement.value;
+				listOutput[listOutput.length] = itm;
+				display();
+			}
+			
+			function moveUpItem()
+			{
+				var editIndex = moveItmElement.value;
+				editIndex = listOutput.length - 1;
+				newIndex = editIndex - 1;
+				listOutput[editIndex] = listOutput[newIndex]
+				display();
+			}
+			
+			function display()
+			{
+				listElement.innerHTML = "";
+				for(var i = 0; i < listOutput.length; i++)
+				{
+					listElement.innerHTML += i + " " + listOutput[i] + "<br>";
+				}
+			}
+		</script>
+	</head>
+	
+	<body onload = "initialize();">
+		<h1>
+			Grocery List
+		</h1>
+		
+		<span>
+			<h1>
+				Control Panel
+			</h1>
+			
+			<input id = "editedindex" type = "text" />
+			
+			<button onclick = "moveUpItem();">Move Item Up</button>
+			
+			<button>Move Item Down</button>
+			
+			<button>Delete the Item</button>
+		</span>
+		
+		<br>
+		
+		<br>
+		
+		<div>
+			<button onclick = "addItem();">Add</button><input id = "groceryitm" type = "text" /> to the List
+		</div>
+		
+		<div>
+			List:
+				<div id = "list">
+				</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<!-- Brian Zhu -->
+<html>
+	<head>
+		<title></title>
+		<style>
+		</style>
+		<script src = "utilities.js"></script>
+		<script src = "cardengine.js"></script>
+		<script>
+			function initialize()
+			{
+				playerOneCardPile = document.getElementById("playeronepile");
+				playerTwoCardPile = document.getElementById("playertwopile");
+				
+				playerOneQty = document.getElementById("playeroneamount");
+				playerTwoQty = document.getElementById("playertwoamount");
+				
+				playerOneTop = document.getElementById("player1card");
+				playerTwoTop = document.getElementById("player2card");
+				
+				playerOneCards = new Object();
+				playerTwoCards = new Object();
+				
+				deck = generateStandardDeck();
+				shuffledDeck = shuffleDeck(deck);
+				
+				playerOneCards.deck = [];
+				
+				playerTwoCards.deck = [];
+				
+				for (i = 0; i < shuffledDeck.length; i++)
+				{
+					if (i % 2 == 0)
+					{
+						playerOneCards.deck.push(shuffledDeck[i]);
+					}
+					else
+					{
+						playerTwoCards.deck.push(shuffledDeck[i]);
+					}
+				}
+				
+				display();
+			}
+			function flipCards()
+			{
+				playerOneTopCard = "images/" + playerOneCards.deck[0].cardImg;
+				playerTwoTopCard = "images/" + playerTwoCards.deck[0].cardImg;
+				playerOneCards.deck.src = playerOneTopCard;
+				playerTwoCards.deck.src = playerTwoTopCard;
+				playerOneTop.src = playerOneCards.deck.src;
+				playerTwoTop.src = playerTwoCards.deck.src;
+				display();
+			}
+			function display()
+			{
+				playerOneQty.innerHTML = playerOneCards.deck.length;
+				
+				playerTwoQty.innerHTML = playerTwoCards.deck.length;
+			}
+		</script>
+	</head>
+	
+	<body onload = "initialize();">
+		<span>
+			<img id = "playeronepile" src = "images/back-blue-75-2.png" />
+			
+			<img id = "player1card" src = "" />
+			
+			<span id = "playeroneamount"></span>
+		
+			<img id = "playertwopile" src = "images/back-blue-75-2.png" />
+			
+			<img id = "player2card" src = "" />
+			
+			<span id = "playertwoamount"></span>
+			
+			<button onclick = "flipCards();">Flip the Top Card!</button>
+		</span>
+	</body>
+</html>

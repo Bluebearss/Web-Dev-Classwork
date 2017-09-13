@@ -1,0 +1,339 @@
+<!DOCTYPE HTML>
+<!-- Brian Zhu -->
+<html>
+	<head>
+		<title></title>
+		<style>
+			img.backimg
+			{
+				position:fixed;
+				height:130%;
+				width:130%;
+				top:-38px;
+				left:-38px;
+				z-index:-1;
+				opacity:0.87;
+			}
+			body
+			{
+				font:bold 13pt rockwell;
+				color:#ffcc00;
+			}
+			div.maincontainer
+			{
+				text-align:center;
+				margin:auto;
+				width:100%;
+			}
+			div.column
+			{
+				display:inline-block;
+				vertical-align:top;
+				position:relative;
+			}
+			img
+			{
+				width:30%;
+			}
+			img.dice
+			{
+				display:none;
+				width:20%;
+			}
+			button
+			{
+				margin-top:8%;
+			}
+		</style>
+		<script src = "utilities.js"></script>
+		<script>
+			function initialize()
+			{
+				playerRedTokens = document.getElementById("playerred");
+				playerBlackTokens = document.getElementById("playerblack");
+				compRedTokens = document.getElementById("compred");
+				compBlackTokens = document.getElementById("compblack");
+				
+				redDieOutput = document.getElementById("redoutput");
+				blackDieOutput = document.getElementById("blackoutput");
+				
+				computerMessage = document.getElementById("computerturnmessage");
+				winnerMessageOutput = document.getElementById("winnermessage");
+				
+				buttonOne = document.getElementById("button1");
+				buttonTwo = document.getElementById("button2");
+				buttonThree = document.getElementById("button3");
+				buttonFour = document.getElementById("button4");
+				buttonFive = document.getElementById("button5");
+				buttonSix = document.getElementById("button6");
+				buttonSeven = document.getElementById("button7");
+				
+				redplayertokensamount = 10;
+				blackplayertokensamount = 10;
+				redcomptokensamount = 10;
+				blackcomptokensamount = 10;
+				
+				tempRedNum = 0;
+
+				tempBlackNum = 0;
+				
+				compTurnMessage = "";
+				winMessage = "";
+				
+				redDieOutput.src = "";
+				blackDieOutput.src = "";
+				
+				buttonOne.disabled = false;
+				buttonTwo.disabled = false;
+				buttonThree.disabled = false;
+				buttonFour.disabled = false;
+				buttonFive.disabled = false;
+				buttonSix.disabled = false;
+				buttonSeven.disabled = false;
+				
+				display();
+			}
+			
+			function computerTurn()
+			{
+				randomRedDieRoll();
+				
+				randomBlackDieRoll();
+				
+				strategyNum = getRandomInteger(1,4);
+				if (strategyNum == 1)
+				{
+					addBlackRemoveRedTokens();
+					
+					compTurnMessage = "The computer has added " + tempBlackNum + " black tokens to his pile and has removed " + tempRedNum + " red tokens from your pile."
+					display();
+				}
+				
+				if (strategyNum == 2)
+				{
+					removeBlackAddRedTokens();
+					
+					compTurnMessage = "The computer has removed " + tempBlackNum + " black tokens from his pile and has added " + tempRedNum + " red tokens to your pile."
+					display();
+				}
+				
+				if (strategyNum == 3)
+				{
+					addRedRemoveBlackTokens();
+					
+					compTurnMessage = "The computer has added " + tempRedNum + " red tokens to his pile and has removed " + tempBlackNum + " black tokens from your pile."
+					display();
+				}
+				
+				if (strategyNum == 4)
+				{
+					removeRedAddBlackTokens();
+					
+					compTurnMessage = "The computer has removed " + tempRedNum + " red tokens from his pile and has added " + tempBlackNum + " black tokens to your pile."
+					display();
+				}
+			}
+			function randomRedDieRoll()
+			{
+				var randomRedNum = getRandomInteger(1,6);
+				
+				redDieOutput.style.display = "inline-block";
+				
+				redDieOutput.src = "images/red" + randomRedNum + ".png";
+				
+				tempRedNum = randomRedNum;
+				
+			}
+			
+			function randomBlackDieRoll()
+			{
+				var randomBlackNum = getRandomInteger(1,6);
+				
+				blackDieOutput.style.display = "inline-block";
+				
+				blackDieOutput.src = "images/black" + randomBlackNum + ".png";
+				
+				tempBlackNum = randomBlackNum;
+			}
+			
+			function removeRedAddBlackTokens()
+			{
+				if (redplayertokensamount <= tempRedNum)
+				{
+					redplayertokensamount = 0;
+				}
+				else
+				{
+					redplayertokensamount -= tempRedNum;
+				}
+				blackcomptokensamount += tempBlackNum;
+				winCondition();
+				display();
+			}
+			
+			function addRedRemoveBlackTokens()
+			{
+				if (blackcomptokensamount <= tempBlackNum)
+				{
+					blackcomptokensamount = 0;
+				}
+				else
+				{
+					blackcomptokensamount -= tempBlackNum;
+				}
+				redplayertokensamount += tempRedNum;
+				winCondition();
+				display();
+			}
+			
+			function removeBlackAddRedTokens()
+			{
+				if (blackplayertokensamount <= tempBlackNum)
+				{
+					blackplayertokensamount = 0;
+				}
+				else
+				{
+					blackplayertokensamount -= tempBlackNum;
+				}
+				redcomptokensamount += tempRedNum;
+				winCondition();
+				display();
+			}
+			
+			function addBlackRemoveRedTokens()
+			{
+				if (redcomptokensamount <= tempRedNum)
+				{
+					redcomptokensamount = 0;
+				}
+				else
+				{
+					redcomptokensamount -= tempRedNum;
+				}
+				blackplayertokensamount += tempBlackNum;
+				winCondition();
+				display();
+			}
+			
+			function display()
+			{
+				playerRedTokens.innerHTML = redplayertokensamount;
+				playerBlackTokens.innerHTML = blackplayertokensamount;
+				compRedTokens.innerHTML = redcomptokensamount;
+				compBlackTokens.innerHTML = blackcomptokensamount;
+				
+				computerMessage.innerHTML = compTurnMessage;
+				winnerMessageOutput.innerHTML = winMessage;
+			}
+			
+			function winCondition()
+			{
+				if (blackplayertokensamount == 0 || blackcomptokensamount == 0)
+				{
+					if (redplayertokensamount > redcomptokensamount)
+					{
+						buttonOne.disabled = true;
+						buttonTwo.disabled = true;
+						buttonThree.disabled = true;
+						buttonFour.disabled = true;
+						buttonFive.disabled = true;
+						buttonSix.disabled = true;
+						buttonSeven.disabled = true;
+						winMessage = "You have won!";
+					}
+					else
+					{
+						if (redcomptokensamount > redplayertokensamount)
+						{
+							buttonOne.disabled = true;
+							buttonTwo.disabled = true;
+							buttonThree.disabled = true;
+							buttonFour.disabled = true;
+							buttonFive.disabled = true;
+							buttonSix.disabled = true;
+							buttonSeven.disabled = true;
+							winMessage = "The computer has won!";
+						}
+						else
+						{
+							buttonOne.disabled = true;
+							buttonTwo.disabled = true;
+							buttonThree.disabled = true;
+							buttonFour.disabled = true;
+							buttonFive.disabled = true;
+							buttonSix.disabled = true;
+							buttonSeven.disabled = true;
+							winMessage = "It is a tie between you and the computer!";
+						}
+					}
+				}
+			}
+		</script>
+	</head>
+	
+	<body onload = "initialize();">
+		<img class = "backimg" src = "images/backimg.jpg" />
+		<div class = "maincontainer">
+			<h1><span>Welcome to the Game of Black and Red!</span></h1>
+			<div class = "column">
+				Player Red Tokens:
+				<div id = "playerred">
+					10
+				</div>
+				
+				<br />
+				
+				Player Black Tokens:
+				<div id = "playerblack">
+					10
+				</div>
+				
+				<img src = "images/redtokens.png" />
+			</div>	
+			
+			<div class = "column">
+				<img class = "dice" id = "redoutput" src = "" />
+				<img class = "dice" id = "blackoutput" src = "" />
+				
+				<div>
+					<div>
+					<button id = "button1" onclick = "randomRedDieRoll();">Click To Roll The Red Die!</button>
+					<button id = "button2" onclick = "randomBlackDieRoll();">Click To Roll The Black Die!</button>
+					</div>
+					
+					<div>
+						<button id = "button3" onclick = "removeRedAddBlackTokens();">Remove red tokens from your pile and add black tokens to your opponent.</button><br />
+						<button id = "button4" onclick = "addRedRemoveBlackTokens();">Add red tokens to your pile and remove black tokens from your opponent.</button><br />
+						<button id = "button5" onclick = "removeBlackAddRedTokens();">Remove black tokens from your pile and add red tokens to your opponent.</button><br />
+						<button id = "button6" onclick = "addBlackRemoveRedTokens();">Add black tokens to your pile and remove red tokens from your opponent.</button>
+					</div>
+				
+					<button id = "button7" onclick = "computerTurn();">Click to start Computer's Turn!</button>
+					
+					<div><button onclick = "initialize();">Reset the Game</button></div>
+				
+					<div id = "computerturnmessage"></div>
+				
+					<h1 id = "winnermessage"></h1>
+				</div>
+			</div>
+			
+			<div class = "column">
+				Computer Red Tokens:
+				<div id = "compred">
+					10
+				</div>
+				
+				<br />
+				
+				Computer Black Tokens:
+				<div id = "compblack">
+					10
+				</div>
+				
+				<img src = "images/redandblacktokens.png" />
+			</div>
+		</div>
+	</body>
+</html>

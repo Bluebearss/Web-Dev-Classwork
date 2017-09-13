@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<!-- Brian Zhu -->
+<html>
+	<head>
+		<title></title>
+		<style>
+			body
+			{
+				font-size:24pt;
+				font-family:calibri;
+			}
+			td
+			{
+				border-style:outset;
+				border-width:15px;
+				border-color:saddlebrown;
+				
+				/*
+					border style types are none,dotted,dashed,solid,double,groove,ridge,inset,outset.
+					border width types are thin,medium,thick,measurement(px,in,cm)
+					border-color types are any color...
+					
+					short hand is border:width style color;
+					
+					border-left
+					border-right
+					border-top
+					border-bottom
+					This helps edit individual sections of the border
+					To change left border color -> border-left-color
+				*/
+			}
+			table
+			{
+				border-style:solid;
+				border-width:20px;
+				border-color:green;
+				/*
+					border-collapse:collapse; This removes the white spaces in between the borders
+					
+					margin-left margin-right margin-top margin-bottom
+					Shorthand is margin:left top right bottom;
+					Or you can do top sides bottom, top/bottom sides and all 4
+					auto does exact space between
+				*/
+				
+				margin:auto;
+			}
+		</style>
+		<script></script>
+	</head>
+	
+	<body>
+		<table>
+			<tr>
+				<th colspan = "3">My Table</th>
+			</tr>
+			<tr>
+				<td rowspan = "2">Column</td>
+				<td>row 1 col 1</td>
+				<td>row 1 col 2</td>
+			</tr>
+			
+			<tr>
+				<td>row 2 col 1</td>
+				<td>row 2 col 2</td>
+			</tr>
+		</table>
+	</body>
+</html>

@@ -1,0 +1,123 @@
+body
+{
+	color:white;
+}
+
+/*	CSS 1	
+	Work with a background image that won't appear distorted if skewed (some people have flat screens and others have square screens).
+	
+	The height and width are both set to 100% to fill the screen.
+	The absolute position is essential.  It prevents the image from moving or creating a scrollbar.  It just sits on your page.
+	
+	NOTE:  I used absolute over fixed because I can use this backimg class to create background images in smaller containers throughout the page as well as the main body.
+	
+	The -1 z-index pushes the image into the background.
+*/
+img.backimg
+{
+	height:100%;
+	width:100%;
+	position:absolute;
+	top:-1px;
+	left:-1px;
+	z-index:-1;
+}
+/*	CSS 1	*/
+
+/*	CSS 4
+	Anything can be done with this including colors, borders and opacity.  You have to match it to your page.
+	
+	In this case, the opacity is 0.7 so we can get the chalkboard texture visible beneath the grey background.  The thin border helps to pop it off the page just a bit and the border radius rounds out the corners.  
+*/
+div img.backimg, span img.backimg
+{
+	opacity:0.7;
+	border:thin solid darkgrey;
+	border-radius:22px;
+}
+/*	CSS 4	*/
+
+/*	CSS 3	*/
+h1 span
+{
+	position:relative;
+	padding:2px 8px;
+}
+
+h1
+{
+	text-align:center;
+	font:36pt engravers mt;
+}
+/*	CSS 3	*/
+
+
+/*	CSS 2
+	Having a container for your columns gives a lot of flexibility in making them come out right.  The position should always be relative.
+	Relative positioning doesn't automatically change the way your element is viewed AND it allows the element to have absolute positioned children (which is essential for background images contained inside the element).
+	
+	I always center whatever's inside of it so that it appears centered on the page.  If I need text to be left or right or justified in child elements, I can change that on an as-needed basis.
+	
+	The margin-auto centers the <div> that is the maincontainer.
+	
+	The design trend is to have space on either side of the page so a width of 80% works for hangman.  Sometimes, you might use a different width.
+
+	A standard column base uses inline-block display, a particular width (depending on how many columns), and a vertical-alignment (often top, but middle in this case).
+*/
+div.maincontainer
+{
+	position:relative;
+	width:80%;
+	text-align:center;
+	margin:auto;
+}
+
+span.column
+{
+	display:inline-block;
+	width:45%;
+	vertical-align:middle;
+}
+/*	CSS 2	*/
+
+/*	CSS 5
+	I use a lot of the same concept on the table that I use on the maintcontainer.  It's centered and everything inside of it is centered.  The width is 90% so there is room on the sides.
+	
+	NOTE:	The table is inside of the a column so it's width will be 90% of the column.
+	
+	Since I made 4 columns, each <td> has a width of 25%.  Unlike elements on a page, you can set the width of a <td> exactly.  The browser will adjust the contents to fit that width because a table is a structured element.
+*/
+table
+{
+	margin:auto;
+	text-align:center;
+	width:90%;
+}
+
+td
+{
+	width:25%;
+}
+/*	CSS 5	*/
+
+/*	CSS 6	*/
+button
+{
+	font:18pt engravers mt;
+}
+
+table button
+{
+	width:100%;
+}
+
+input
+{
+	font:24pt calibri;
+}
+
+div#solbox
+{
+	font:bold 36pt calibri;
+}
+/*	CSS	6	*/

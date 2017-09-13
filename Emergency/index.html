@@ -1,0 +1,299 @@
+<!DOCTYPE HTML>
+<!-- Ivan Turner 
+	
+	The following code runs a web page that simulates a firehouse having to deal with various emergencies popping up all over a city.  The user's job is to dispatch trucks to the emergencies so that they will be resolved and the city can be safe.
+
+	Throughout the code there are numerous comments, QUESTIONS, and ACTIVITIES.  Read the code and complete the QUESTIONS and ACTIVITIES.  For many of the QUESTIONS, there is no single right answer.  Use your best judgment and formulate a hypothesis or opinion.
+-->
+<html>
+	<head>
+		<title>Emergency!</title>
+		<link rel = "stylesheet" href = "templatecss.css" />
+		<style>
+			body
+			{
+				font:bold 24pt calibri;
+				background-color:#ffebcc;
+			}
+			
+			button
+			{
+				font:bold 24pt calibri;
+			}
+			
+			h2
+			{
+				font:36pt broadway;
+				color:#8B0000;
+				background-color:darkgrey;
+				border-radius:20px;
+			}
+			
+			h2 img
+			{
+				width:80%;
+			}
+			
+			div#emergencyevents img
+			{
+				height:40px;
+			}
+			
+			div.maincontainer
+			{
+				width:100%;
+			}
+			
+			span.column
+			{
+				width:30%;
+				border:thin solid black;
+				border-radius:10px;
+				background-color:lightgrey;
+			}
+			
+			span.column + span.column
+			{
+				width:65%;
+				margin-top:-335px;
+			}
+			
+			img[src = "images/firetruck.png"]
+			{
+				width:20%;
+			}
+		</style>
+		<script src = "utilities.js"></script>
+		<script>
+			/*
+				Firehouse prototype
+				
+				ACTIVITY:	Write a description of the Firehouse prototype.  What is its purpose in a program?
+			*/
+			function Firehouse(trucks)
+			{
+				//Member variables
+				this.numTrucks = trucks;
+				
+				//Member functions
+				
+				/*
+					dispatchTrucks
+					
+					This function will remove trucks from the firehouse.
+					
+					Parameters:
+						trucks:	the number of trucks to remove.
+						
+					Returns:
+						the number of trucks dispatched.
+						
+					QUESTION:	The parameter tells the function how many trucks to remove from the firehouse.  Since the call to the function provides that information, why would it also need the function to return that same information?
+				*/
+				this.dispatchTrucks = function(trucks)
+				{
+					/*
+						If the dispatcher calls for too many trucks, change the number of trucks requested to the number of trucks available.
+					*/
+					if (trucks > this.numTrucks)
+						trucks = this.numTrucks;
+						
+					//Remove the trucks
+					this.numTrucks -= trucks;
+					
+					return trucks;
+				}
+				
+				/*
+					returnTrucks
+					
+					Returns the trucks to the firehouse.
+					
+					Parameters:
+						trucks:	The number of trucks being returned.
+				*/
+				this.returnTrucks = function(trucks)
+				{
+					this.numTrucks += trucks;
+				}
+			}
+			
+			/*
+				Emergency prototype
+				
+				ACTIVITY:	Write a description of the Emergency prototype.  What is its purpose in a program?
+			*/
+			function Emergency(type, icon)
+			{
+				//Member variables
+				this.emergencyType = type;				//A string
+				this.emergencyIcon = icon;				//An image filename
+				this.numTrucks = 0;						//The number of fire trucks on the scene.
+				
+				//Member functions
+				
+				/*
+					receiveTrucks
+					Adds trucks to the emergency.
+					
+					Parameters:
+						trucks:	The number of trucks arriving on the scene.
+						
+					QUESTION:	What is the purpose of this function if a programmer can simply add to the member variable directly?
+				*/
+				this.receiveTrucks = function(trucks)
+				{
+					this.numTrucks += trucks;
+				}
+				
+				/*
+					toString
+					Provides a string representation of the object
+					
+					Returns:
+						A string containing the relevant information about the object.
+						
+					FACT:	toString is a common function used in many objects.  In Java, every prototype, or "class", is descended from the Object class and INHERITS the toString function.
+				*/
+				this.toString = function()
+				{
+					return this.emergencyType + ": There are " + this.numTrucks + " trucks on the scene.";
+				}
+			}
+			
+			//Functions
+			
+			/*
+				initialize
+				
+				Creates and initializes constants and variables that are used throughout the course of the program.
+			*/
+			function initialize()
+			{
+				EMERGENCY_TYPES = ["Cat in a Tree", "Car Accident", "Fire", "Building Collapse", "Gas Leak"];
+				EMERGENCY_ICONS = ["cat.png", "car accident.png", "icon-flame.png", "building collapse.png", "gas leak.png"];
+			
+				station = new Firehouse(10);
+				emergencies = [];
+				
+				/*
+					QUESTION:	What do each of these timers do?
+				*/
+				emergencyTimer = setInterval(createEmergency, 5000);
+				resolutionTimer = setTimeout(resolveEmergencies, 1000);
+				displayTimer = setInterval(display, 200);
+				
+				firetrucksOut = document.getElementById("firetrucks");
+				emergencyEventsOut = document.getElementById("emergencyevents");
+			}
+			
+			/*
+				createEmergency
+				
+				Creates a new emergency object and pushes it onto the emergencies array.
+			*/
+			function createEmergency()
+			{
+				newEmergencyType = getRandomInteger(0,EMERGENCY_TYPES.length - 1);
+				emergencies.push(new Emergency(EMERGENCY_TYPES[newEmergencyType], EMERGENCY_ICONS[newEmergencyType]));
+			}
+			
+			/*
+				resolveEmergencies
+				
+				Cycles through the emergencies array and determines whether or not the danger has passed.
+			*/
+			function resolveEmergencies()
+			{
+				//Loop through all of the emergencies
+				for (var i = emergencies.length - 1; i >= 0; i--)
+				{
+					//An emergency can only be resolved if there are trucks on the scene.
+					if (emergencies[i].numTrucks > 0)
+					{
+						/*
+							QUESTION:	How is an emergency resolved?
+						*/
+						if (Math.random() < emergencies[i].numTrucks / 20)
+						{
+							station.returnTrucks(emergencies[i].numTrucks);
+							emergencies.splice(i, 1);
+						}
+					}
+				}
+				
+				resolutionTime = setTimeout(resolveEmergencies, 1000);
+			}
+			
+			/*
+				sendTrucks
+				
+				Adds trucks to an emergency.
+				
+				Parameters:
+					numTrucks:	The number of trucks arriving on the scene.
+			*/
+			function sendTrucks(numTrucks)
+			{
+				/*
+					QUESTION:	Why does the program run numTrucks through a parseInt?  What is the purpose of the if conditional?
+				*/
+				numTrucks = parseInt(numTrucks);
+				if (isNaN(numTrucks) || emergencies.length == 0)
+					return;
+					
+				/*
+					QUESTION:	Where do the trucks go?
+				*/
+				dispatchTo = getRandomInteger(0, emergencies.length - 1);
+				/*
+					ACTIVITY:	Break down and identify each part of the next line of code.
+				*/
+				emergencies[dispatchTo].receiveTrucks(station.dispatchTrucks(numTrucks));
+			}
+			
+			/*
+				display
+				
+				Displays all of the relevant information on screen.
+				
+				QUESTION:	When is this function called?
+			*/
+			function display()
+			{
+				firetrucksOut.innerHTML = station.numTrucks;
+				
+				/*
+					QUESTION:	Building a temporary string is more efficient than building directly to an element's innerHTML.  Why?
+				*/
+				outstring = "";
+				for (i in emergencies)
+				{
+					outstring += "<img src = 'images/" + emergencies[i].emergencyIcon + "' /> " + emergencies[i].toString() + "<br />";
+				}
+				
+				emergencyEventsOut.innerHTML = outstring;
+			}
+		</script>
+	</head>
+		
+	<body onload = "initialize();">
+		<h2>
+			<span>Emergency!</span><br />
+			<img src = "images/Red.png" />
+		</h2>
+		<div class = "maincontainer">
+			<span class = "column">
+				<img src = "images/firetruck.png" /> <span id = "firetrucks"></span> Trucks <img src = "images/firetruck.png" />
+				<hr />
+				<div>
+					<button>Dispatch</button> <input type = "text" onchange = "sendTrucks(this.value);this.value = '';" /> fire trucks to the scene.
+				</div>
+			</span>
+			
+			<span class = "column">
+				<div id = "emergencyevents"></div>
+			</span>
+		</div>
+	</body>
+</html>

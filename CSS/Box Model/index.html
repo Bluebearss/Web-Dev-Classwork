@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+<!-- Brian Zhu -->
+<html>
+	<head>
+		<title>Box Model</title>
+		<style>
+			#ctnr
+			{
+				position:fixed;
+				left:25%;
+				border:thin solid black;
+				width:50%;
+				top:50px;
+				height:300px;
+			}
+			
+			#bbox
+			{
+				border:thick solid black;
+				padding:5px;
+				background-color:lightgrey;
+			}
+			
+			button.pbtn
+			{
+				font-family:comic sans ms;
+				background-color:lightblue;
+			}
+		</style>
+		
+		<script>
+			function initialize()
+			{
+				containerBox = document.getElementById("ctnr");
+				bouncyBox = document.getElementById("bbox");
+				
+				leftInput = document.getElementById("leftin");
+				topInput = document.getElementById("topin");
+				widthInput = document.getElementById("widthin");
+				heightInput = document.getElementById("heightin");
+				
+				bbLeft = 0;
+				bbTop = 0;
+				bbWidth = "";
+				bbHeight = "";
+				
+				bbPosition = "static";
+				
+				showImage = false;
+				
+				display();
+			}
+			
+			function moveBouncyBox()
+			{
+				bbLeft = leftInput.value;
+				bbTop = topInput.value;
+			}
+			
+			function resizeBouncyBox()
+			{
+				bbWidth = widthInput.value;
+				bbHeight = heightInput.value;
+			}
+			
+			function changePositioning(pos)
+			{
+				bbPosition = pos;
+				moveBouncyBox();
+				resizeBouncyBox();
+				display();
+			}
+			
+			function toggleBackgroundImage()
+			{
+				showImage = !showImage;
+				display();
+			}
+			
+			function display()
+			{
+				bouncyBox.style.left = bbLeft + "px";
+				bouncyBox.style.top = bbTop + "px";
+				bouncyBox.style.width = bbWidth + "px";
+				bouncyBox.style.height = bbHeight + "px";
+
+				bouncyBox.style.position = bbPosition;
+				
+				bouncyBox.innerHTML = "Bouncy Box - " + bbPosition;
+				
+				if (showImage)
+					bouncyBox.style.backgroundImage = "url('images/ninja kitten.jpg')";
+				else
+					bouncyBox.style.backgroundImage = "";
+			}
+		</script>
+	</head>
+		
+	<body onload = "initialize();">
+		<div id = "ctnr">
+			<span id = "bbox">
+				Bouncy Box - static
+			</span>
+		</div>
+		
+		<label>Left: <input id = "leftin" type = "text" /></label>
+		<label>Top: <input id = "topin" type = "text" /></label>
+		<label>Width: <input id = "widthin" type = "text" /></label>
+		<label>Height: <input id = "heightin" type = "text" /></label>
+		<!-- <button onclick = "moveBouncyBox();">Move Bouncy Box</button> -->
+		<button class = "pbtn" onclick = "changePositioning('static');">Static</button>
+		<button class = "pbtn" onclick = "changePositioning('absolute');">Absolute</button>
+		<button class = "pbtn" onclick = "changePositioning('fixed');">Fixed</button>
+		<button class = "pbtn" onclick = "changePositioning('relative');">Relative</button>
+		<button class = "ibtn" onclick = "toggleBackgroundImage();">Toggle Image</button>
+	</body>
+</html>

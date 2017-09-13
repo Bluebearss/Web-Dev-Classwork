@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<!-- Brian Zhu -->
+<html>
+	<head>
+		<title></title>
+		<style>
+		</style>
+		<script src = "utilities.js"></script>
+		<script src = "cardengine.js"></script>
+		<script>
+			function initialize()
+			{
+				playerOneCardPile = document.getElementById("playeronepile");
+				playerTwoCardPile = document.getElementById("playertwopile");
+				
+				playerOneQty = document.getElementById("playeroneamount");
+				playerTwoQty = document.getElementById("playertwoamount");
+				
+				playerOneCards = new Object();
+				playerTwoCards = new Object();
+				
+				deck = generateStandardDeck();
+				shuffledDeck = shuffleDeck(deck);
+				
+				playerOneCards.deck = [];
+				
+				playerTwoCards.deck = [];
+				
+				for (i = 0; i < shuffledDeck.length; i++)
+				{
+					if (i % 2 == 0)
+					{
+						playerOneCards.deck.push(shuffledDeck[i]);
+					}
+					else
+					{
+						playerTwoCards.deck.push(shuffledDeck[i]);
+					}
+				}
+				
+				display();
+			}
+			function display()
+			{
+				playerOneQty.innerHTML = playerOneCards.deck.length;
+				
+				playerTwoQty.innerHTML = playerTwoCards.deck.length;
+			}
+		</script>
+	</head>
+	
+	<body onload = "initialize();">
+		<span>
+			<img id = "playeronepile" src = "images/back-blue-75-2.png" />
+			
+			<span id = "playeroneamount"></span>
+		
+			<img id = "playertwopile" src = "images/back-blue-75-2.png" />
+			
+			<span id = "playertwoamount"></span>
+		</span>
+	</body>
+</html>

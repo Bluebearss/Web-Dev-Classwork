@@ -1,0 +1,125 @@
+<!DOCTYPE HTML>
+<!-- Brian Zhu -->
+<html>
+	<head>
+		<title>Rat Race</title>
+		
+		<link rel = "stylesheet" href = "ratrace.css" />
+		
+		<style></style>
+		
+		<script src = "utilities.js"></script>
+		<script>
+			function initialize()
+			{
+				mickeyOut = document.getElementById("mickeyspan");
+				itchyOut = document.getElementById("itchyspan");
+				jerryOut = document.getElementById("jerryspan");
+				lapOut = document.getElementById("laps");
+				
+				mickey = 0;
+				itchy = 0;
+				jerry = 0;
+				lap = 0;
+			}
+			
+			function runLap()
+			{
+				if (lap == 10)
+				{
+					return;
+				}
+				
+				lap += 1;
+				
+				mickey += getRandomInteger(7,14);
+				
+				itchy += getRandomInteger(5,15);
+				
+				jerry += getRandomInteger(3,17);
+				
+				showRats();
+			}
+			
+			function showRats()
+			{
+				mickeyOut.innerHTML = mickey;
+				
+				itchyOut.innerHTML = itchy;
+				
+				jerryOut.innerHTML = jerry;
+				
+				lapOut.innerHTML = "This is lap" + " " + lap + "!";
+				
+				if (lap == 10)
+				{
+					if (mickey > itchy && mickey > jerry)
+					{
+						lapOut.innerHTML = "Mickey is the fastest mouse of this pile! No one stretches his buttons!"
+					}
+					else
+					{
+						if(itchy > mickey && itchy > jerry)
+						{
+							lapOut.innerHTML = "Itchy is the winner of this race! He schooled the other two mouses even while carrying an axe!"
+						}
+						else
+						{
+							if(jerry > mickey && jerry > itchy)
+							{
+								lapOut.innerHTML = "Jerry is victorious! Guess all those running exercises with Tom was worthwhile after all!"
+							}
+							else
+							{
+								if (jerry > mickey && itchy > mickey && jerry == itchy)
+								{
+									lapOut.innerHTML = "It is a tie between Jerry and Itchy! Maybe Mickey should ditch those overalls if he wants a shot at glory!"
+								}
+								else
+								{
+									if (jerry > itchy && mickey > itchy && mickey == jerry)
+									{
+										lapOut.innerHTML = "It is a tie between Jerry and Mickey! Looks like Itchy needs to ditch that axe if he wants a shot at winning!"
+									}
+									else
+									{
+										if (mickey > jerry && itchy > jerry && mickey == itchy)
+										{
+											lapOut.innerHTML = "It is a tie between Mickey and Itchy! Looks like Jerry had no juice left after his run with Tom!"
+										}
+										else
+										{
+											lapOut.innerHTML = "It is a tie between all 3 mouses! Looks like each mouse brought their A - Game this time around!"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+ 			}
+		</script>
+	</head>
+		
+	<body onload = "initialize();">
+		<p id = "laps">
+			Gentlemen, start your mouses.
+		</p>
+		<h1>
+			<img src = "images/mickey.png" /><br />
+			Mickey: <span id = "mickeyspan">0</span>
+		</h1>
+		<h2>
+			<img src = "images/itchy.png" /><br />
+			Itchy: <span id = "itchyspan">0</span>
+		</h2>
+		<h3>
+			<img src = "images/jerry.png" /><br />
+			Jerry: <span id = "jerryspan">0</span>
+		</h3>
+		
+		<h3>
+			<button onclick = "runLap();">Run!</button>
+		</h3>
+	</body>
+</html>

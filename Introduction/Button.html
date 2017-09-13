@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<!-- Brian Zhu -->
+<html>
+	<head>
+		<title>Add Subtract Multiply Divide</title>
+
+		<script>
+			function initialize()
+			{
+				createVariables();
+
+			}
+			
+			function createVariables()
+			{
+				x = 3;
+				y = 7;
+			}
+			
+			function add()
+			{
+				answer = x + y;
+				alert(x + "+" + y + "=" + answer);
+			}
+			
+			function subtract()
+			{
+				answer = x - y
+				alert(answer);
+			}
+			
+			function multiply()
+			{
+				answer = x * y
+				alert(answer);
+			}
+			
+			function divide()
+			{
+				answer = x / y
+				alert(answer);
+			}
+		</script>
+		
+	</head>
+	
+	<body onload = "initialize();">
+		<button onclick="add();">
+		Add
+		</button>
+		<button onclick="subtract();">
+		Subtract
+		</button>
+		<button onclick="multiply();">
+		Multiply
+		</button>
+		<button onclick="divide();">
+		Divide
+		</button>
+	</body>
+</html>

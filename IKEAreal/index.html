@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+	<head> 
+		<title> 
+		</title>
+		<link rel = "stylesheet" href = "index.css" />
+		<style> 
+		</style> 
+		<script src = "code.js"></script>
+		<script>
+		</script>
+	</head>
+	
+	<body onload = "initialize();">
+		<button onclick = "changeRoom()" id = "roombutton">==[></button>
+		<h2 id = "money"></h2>
+	`	<img id = "room" src = "" usemap = "#floor"/>
+		<map id = "imgfloor" ondragover = "allowDrop(event);" ondrop = "dropElement(event);" name = "floor">
+			<area shape = "poly" coords = "1279,599,1279,919,0,922,410,595">
+			<area shape = "poly" coords = "412,594,0,920,0,795">
+		</map>
+		<div id = "selectionmenu" class = "menu">
+			<p onclick = "updateFurnitureBox(bedObject)">Bed</p>
+			<p onclick = "updateFurnitureBox(chairObject)">Chair</p>
+			<p onclick = "updateFurnitureBox(computerChairObject)">Computer Chair</p>
+			<p onclick = "updateFurnitureBox(diningTableObject)">Dining Table</p>
+			<p onclick = "updateFurnitureBox(drawerObject)">Drawer</p>
+			<p onclick = "updateFurnitureBox(footStoolObject)">Foot stool</p>
+			<p onclick = "updateFurnitureBox(grandPianoSofaObject)">Grand Piano Sofa</p>
+			<p onclick = "updateFurnitureBox(reclinerObject)">Recliner</p>
+			<p onclick = "updateFurnitureBox(shelfObject)">Shelf</p>
+			<p onclick = "updateFurnitureBox(stepStoolObject)">Step Stool</p>
+			<p onclick = "updateFurnitureBox(tableObject)">Table</p>
+			<p onclick = "updateFurnitureBox(tvShelfObject)">TV Shelf</p>
+		</div>
+		<div id = "furniturecustomization" class = "menu">
+			<button onclick = "displayFurnitureSelection()">Menu</button><br />
+			<h1 id = "namemoney"></h1><br />
+			<div id = "colorBox"></div><br />
+			<img id = "furnitureimage" draggable = "true" ondragstart = "startDrag(event)" src = "" /><br />
+			<button onclick = "changezIndex(0)">Place Behind</button><button onclick = "changezIndex(2)">Place In Front</button>
+		</div>
+	</body>
+</html>

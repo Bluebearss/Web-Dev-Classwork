@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<!-- Brian Zhu -->
+<html>
+	<head>
+		<title>Drop Down Menus</title>
+		<style>
+			h2
+			{
+				display:inline-block;
+				font:bold 18pt arial;
+				width:17%;
+				vertical-align:top;
+			}
+			span
+			{
+				display:inline-block;
+			}
+			div.menucontainer
+			{
+				margin:auto;
+				text-align:center;
+				width:80%;
+				border:thin solid black;
+			}
+			div.subcontainer
+			{
+				display:none;
+			}
+		</style>
+		<script>
+			function initialize()
+			{
+				mainBox = document.getElementById("maincontainer");
+				
+				subList = mainBox.getElementsByTagName("h2");
+				
+				toggle = false;
+			}
+			function showSubMenu(idx)
+			{
+				cBox = subList[idx].getElementsByTagName("div");
+				
+				toggle = !toggle;
+				
+				if (toggle == true)
+				{
+					cBox[0].style.display = "block";
+				}
+				else
+				{
+					cBox[0].style.display = "none";
+				}
+			}
+		</script>
+	</head>
+	
+	<body onload = "initialize();">
+		<div class = "menucontainer" id = "maincontainer">
+			<h2 onmouseover = "showSubMenu(0);" onmouseout = "showSubMenu(0);">
+				Menu Item 1<br />
+				<div class = "subcontainer">
+					<span>Sub Menu</span><br />
+					<span>Sub Menu</span><br />
+					<span>Sub Menu</span><br />
+					<span>Sub Menu</span><br />
+					<span>Sub Menu</span><br />
+					<span>Sub Menu</span><br />
+				</div>
+			</h2>
+			
+			<h2 onmouseover = "showSubMenu(1);" onmouseout = "showSubMenu(1);">
+				Menu Item 2<br />
+				<div class = "subcontainer">
+					<span>Sub Menu</span><br />
+					<span>Sub Menu</span><br />
+					<span>Sub Menu</span><br />
+					<span>Sub Menu</span><br />
+				</div>
+			</h2>
+			
+			<h2 onmouseover = "showSubMenu(2);" onmouseout = "showSubMenu(2);">
+				Menu Item 3<br />
+				<div class = "subcontainer">
+					<span>Sub Menu</span><br />
+					<span>Sub Menu</span><br />
+					<span>Sub Menu</span><br />
+					<span>Sub Menu</span><br />
+					<span>Sub Menu</span><br />
+				</div>
+			</h2>
+			
+			<h2 onmouseover = "showSubMenu(3);" onmouseout = "showSubMenu(3);">
+				Menu Item 4<br />
+				<div class = "subcontainer">
+					<span>Sub Menu</span><br />
+					<span>Sub Menu</span><br />
+					<span>Sub Menu</span><br />
+					<span>Sub Menu</span><br />
+					<span>Sub Menu</span><br />
+					<span>Sub Menu</span><br />
+				</div>
+			</h2>
+			
+			<h2 onmouseover = "showSubMenu(4);" onmouseout = "showSubMenu(4);">
+				Menu Item 5<br />
+				<div class = "subcontainer">
+					<span>Sub Menu</span><br />
+					<span>Sub Menu</span><br />
+				</div>
+			</h2>
+		</div>
+	</body>
+</html>

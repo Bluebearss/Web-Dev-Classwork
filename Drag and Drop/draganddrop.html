@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<!-- Brian Zhu -->
+<html>
+	<head>
+		<title></title>
+		<style>
+			div#mydiv
+			{
+				position:relative;
+				width:800px;
+				height:800px;
+				border:thin solid black;
+			}
+		</style>
+		<script>
+			function initialize()
+			{
+				theDiv = document.getElementById("mydiv");
+				
+			}
+			
+			function startDrag(e)
+			{
+				e.preventDefault();
+				
+				e.dataTransfer.setData("source", e.target.src);
+			}
+			
+			function allowDrop(e)
+			{
+				e.preventDefault();
+			}
+			
+			function dropElement(e)
+			{
+				e.preventDefault();
+				
+				imgSrc = e.dataTransfer.getData("source");
+				newImg = document.createElement("img");
+				newImg.src = imgSrc;
+				newImg.style.position = "absolute";
+				
+				newImg.style.left = e.clientX + "px";
+				newImg.style.right = e.clientY + "px";
+				
+				theDiv.innerHTML = "(" + e.clientX + "," + e.clientY + ")";
+				theDiv.appendChild(newImg);
+			}
+		</script>
+	</head>
+	
+	<body onload = "initialize();">
+		<div id = "mydiv" ondrop = "dropElement(event);" ondragover = "allowDrop(event);"></div>
+		<img src = "wings.jpg" draggable = "true" ondragstart = "startDrag(event);" />
+	</body>
+</html>

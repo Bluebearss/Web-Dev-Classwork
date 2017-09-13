@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>A Word About Trolls</title>
+		<link rel = "stylesheet" type = "text/css" href = "trolls.css" />
+		
+		<script>
+			function initialize()
+			{
+				/*
+					HTML elements
+				*/
+				ripImage = document.getElementById("rip");
+				mainBox = document.getElementById("maintext");
+				
+				/*
+					Grabs all of the <div> elements from the main div.
+					Each of these elements contains a "chapter" of text.
+				*/
+				historyText = mainBox.getElementsByTagName("div");
+				
+				/*
+					Since CSS has been used to make all of the "chapters" invisible, this makes the first one visible.
+					The global index will be used to make one disappear as another appears.
+				*/
+				historyText[0].style.display = "block";
+				currentTextIdx = 0;
+			}
+			
+			function showText(textIdx)
+			{
+				/*
+					The troll ripping through should be more visible if the intro chapter is selected, and less visible if any of the others are selected.
+				*/
+				if (textIdx == 0)
+					ripImage.style.opacity = "0.6";
+				else
+					ripImage.style.opacity = "0.1";
+					
+				/*
+					Make the currently showing chapter invisible.
+					Make the selected chapter visible.
+					Update the global index.
+				*/
+				historyText[currentTextIdx].style.display = "none";
+				historyText[textIdx].style.display = "block";
+				currentTextIdx = textIdx;
+			}
+		</script>
+	</head>
+		
+	<body onload = "initialize();">
+		<img class = "backimg" src = "images/tabletop.jpg" />
+		<div class = "maincontainer">
+			<h1><span>The Book of Trolls</span></h1>
+			<div class = "sidemenu">
+				<!--
+					Each of these menu items corresponds to a chapter.  The <div> elements that hold the chapter have been stored in an array.  By passing through the index, the code links the menu item to the chapter.
+					
+					Note that they start with index 1, NOT because the array does, but because index 0 is the intro chapter, which is shown when you click on the image.
+				-->
+				<span class = "sideitem" onmouseover = "showText(1);">Names</span>
+				<span class = "sideitem" onmouseover = "showText(2);">Elders</span>
+				<span class = "sideitem" onmouseover = "showText(3);">School</span>
+				<span class = "sideitem" onmouseover = "showText(4);">Good & Evil</span>
+				<img onclick = "showText(0)" src = "images/troll small.jpg" />
+			</div>
+
+			<div id = "maintext">
+				<img id = "scroll" src = "images/scroll.png" />
+				<img id = "rip" src = "images/rip.png" />
+				<div>
+					<h2>Hover over the Chapters</h2>
+					<h2>to read about Trolls</h2>
+				</div>
+				<div>
+					<h2>A word about names:</h2>
+					Trolls don’t have names.  They are very imitative creatures and identify each other by mimicking the actions and voices of others.  That is to say, if I were at the dinner table, I might say, “Jeremiah, please pass the beans.”  Jeremiah, of course, would know that I was talking to him because I had addressed him by name.  A Troll, on the other hand, might say, “Please pass the beans.”  The Troll being addressed would know that he or she was being addressed by the tone of voice of the first Troll.  It’s almost as if Jeremiah had a beaky nose and a waddly neck, like a turkey.  Rather than addressing him by name, I might ask him to pass the beans by saying just that, but in a gobble-gobble sort of voice.  Everyone in the room would then know that I was addressing Jeremiah because I had used a voice that reminded them all of a turkey.  To Trolls, this was not something that was used to demean or offend.  Trolls, unlike humans, are very aware of their own characteristics and recognize them when they are imitated.  This is one of their great strengths.  They do not engage in verbal humor and, in fact, find language in its verbal form to be most cumbersome.
+				</div>
+				<div>
+					<h2>A word about Elders:</h2>
+					Trolls don’t have a word for Elder.  They also don’t have a word for Leader.  Trolls that lead generally do so by mutual agreement of all of the Trolls involved.  Since the nature of a Troll’s pride revolves around a job well done, a Troll is more inclined to want a job at which he or she will succeed, rather than a job that is considered classically powerful.  The leaders of a Troll community are generally the eldest, but do not necessarily lead by default.  Also, the word to describe them roughly translates into parents.  Decisions that are made for the community are usually made by the parents with the largest families.
+				</div>
+				<div>
+					<h2>A word about school:</h2>
+					Trolls have never believed in formal education in the classroom.  In fact, it was a concept of which they had not conceived and were quite confused by the gathering of small humans in rooms so that they might have to suffer through the verbal lectures of a single larger human.  Trolls, instead educate their young by including their young in their daily lives.  As a part of the adult community, the children tend to learn more than they might from a lecture.  They are shown things and encouraged to participate in carrying out important responsibilities.  As a Troll matures, he or she will determine what interests him or her.  At that time, a young Troll may leave his or her natural parents during the day and spend time with another Troll who is an expert or master at the occupation of interest.  It is rare that these apprenticeships fail.  Trolls are very steadfast.  Even the young tend to stick with their decisions.
+				</div>
+				<div>
+					<h2>A word about good and evil:</h2>
+					Good trolls have bright yellow eyes.  Evil trolls have smoldering red eyes.  That’s simple to remember and a good rule of thumb.  But, like humans, trolls are individuals.  The genetic stuff that determines the color of the eyes cannot also determine the nature of the personality.  There is something in Trolls which directs their instinctive behavior.  The conscience, which is really the determination between good and evil, is stronger in the yellow-eyed Trolls than it is in the red-eyed trolls.  However, a red-eyed Troll can very well overcome whatever it is that might make him or her instinctively act evilly or vice versa.  Just because a yellow-eyed Troll might feel bad about skinning a cat, that won’t necessarily stop him from doing it if it’s something he wants to do.
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

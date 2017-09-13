@@ -1,0 +1,208 @@
+<!DOCTYPE HTML>
+<!-- Brian Zhu -->
+<html>
+	<head>
+		<title>Rat Race</title>
+		
+		<link rel = "stylesheet" href = "ratrace.css" />
+		
+		<style></style>
+		
+		<script src = "utilities1.js"></script>
+		<script>
+			function initialize()
+			{
+				//Constants that represent the lower and upper bounds of the random distances the mice run each round.
+				LOWER = 1, UPPER = 10;
+				
+				//Constants to represent the winners of the race.
+				NONE = 0, MICKEY = 2, JERRY = 3, ITCHY = 4;
+				
+				//HTML Element objects
+				mickeyOut = document.getElementById("mickeyspan");
+				itchyOut = document.getElementById("itchyspan");
+				jerryOut = document.getElementById("jerryspan");
+				lapOut = document.getElementById("laps");
+				winnerOut = document.getElementById("winnercomment")
+				
+				//The mice
+				mickey = 0;
+				itchy = 0;
+				jerry = 0;
+				
+				//The winner (starts at none)
+				whoIsTheWinner = NONE;
+				
+				//The number of laps (rounds).
+				numLaps = 0;
+			}
+			
+			/*
+				NOTE: THIS FUNCTION VARIES FROM WHAT WAS DONE IN CLASS.  I CHOSE TO REMOVE THE return STATEMENT AS IT PROVED TO BE MORE OF A HINDRANCE THAN A HELP.
+				
+				YOU CAN'T BE AFRAID TO CHANGE THE WAY YOU CODE SOMETIMES, EVEN IF IT'S DIFFERENT THAN WHAT YOU NORMALLY DO.
+			*/
+			function runLap()
+			{
+				//If the race is still going...
+				if (numLaps < 10)
+				{
+					numLaps = numLaps + 1;
+					mickey += getRandomInteger(LOWER, UPPER);
+					itchy += getRandomInteger(LOWER, UPPER);
+					jerry += getRandomInteger(LOWER, UPPER);
+				}
+				
+				//If the race is done.
+				/*
+					During lap 10, both this and the previous conditional will evaluate to true.  This prevents the user from having to click the button 1 extra time to see the winner.
+				*/
+				if (numLaps >= 10)
+				{
+					//The whoIsTheWinner variable gets its value from what's returned by determineWinner().
+					whoIsTheWinner = determineWinner();
+				}
+				
+				//Always display!
+				showRats();
+			}
+			
+			/*
+				NOTE:  THIS FUNCTION DIFFERS FROM WHAT WAS DONE IN CLASS.  INSTEAD OF NESTING THE if CONDITIONALS, BASHING THROUGH THE CONDITIONS SEEMED THE BEST WAY TO GO ABOUT IT.
+			*/
+			function determineWinner()
+			{
+				if(mickey > jerry && mickey > itchy)
+				{
+					return MICKEY;
+				}
+				
+				if(jerry > mickey && jerry > itchy)
+				{
+					return JERRY;
+				}
+				
+				if (itchy > mickey && itchy > jerry)
+				{
+					return ITCHY;
+				}
+				
+				//By multiplying the winners, we can account for ties as easily as single winners without having to create new constants (NUMBERS!).
+				if (mickey == jerry && mickey == itchy)
+				{
+					return MICKEY * ITCHY * JERRY;
+				}
+				
+				if (mickey == jerry)
+				{
+					return MICKEY * JERRY;
+				}
+				
+				if (mickey == itchy)
+				{
+					return MICKEY * ITCHY;
+				}
+				
+				if (jerry == itchy)
+				{
+					return JERRY * ITCHY;
+				}
+			}
+			
+			/*
+				This function converts the winner constant to a string for display.
+			*/
+			function getWinnerOutput()
+			{
+				if (whoIsTheWinner == MICKEY)
+				{
+					return "Mickey";
+				}
+				
+				if (whoIsTheWinner == JERRY)
+				{
+					return "Jerry";
+				}
+				
+				if (whoIsTheWinner == ITCHY)
+				{
+					return "Itchy";
+				}
+				
+				//You can compare values that are calculated on the spot using arithmetic or function calls.
+				if (whoIsTheWinner == MICKEY * JERRY)
+				{
+					return "Mickey & Jerry";
+				}
+				
+				if (whoIsTheWinner == MICKEY * ITCHY)
+				{
+					return "Mickey & Itchy";
+				}
+				
+				if (whoIsTheWinner == JERRY * ITCHY)
+				{
+					return "Jerry & Itchy";
+				}
+				
+				if (whoIsTheWinner == MICKEY * JERRY * ITCHY)
+				{
+					return "Mickey & Jerry & Itchy";
+				}
+			}
+			
+			function showRats()
+			{
+				mickeyOut.innerHTML = mickey;
+				itchyOut.innerHTML = itchy;
+				jerryOut.innerHTML = jerry;
+				
+				//Build a string to identify the lap number.  Adding text to the number itself makes it display more nicely.
+				lapOut.innerHTML = "This is the " + getRandomIntegerSuffix(numLaps) + " lap.";
+				winnerOut.innerHTML = "";
+				
+				/*
+					By asking questions about the winner's value, the output can be customized for a clear winner or for ties.
+				*/
+				if (whoIsTheWinner > NONE)
+				{
+					if (whoIsTheWinner <= ITCHY)
+					{
+						winnerOut.innerHTML = "The winner is " + getWinnerOutput() + "!";
+					}
+					else
+					{
+						winnerOut.innerHTML = "There is a tie between " + getWinnerOutput() + "!";
+					}
+				}
+			}
+			
+			
+		</script>
+	</head>
+		
+	<body onload = "initialize();">
+		<p id = "laps">
+			Gentlemen, start your mouses.
+		</p>
+		<h1>
+			<img src = "images/mickey.png" /><br />
+			Mickey: <span id = "mickeyspan">0</span>
+		</h1>
+		<h2>
+			<img src = "images/itchy.png" /><br />
+			Itchy: <span id = "itchyspan">0</span>
+		</h2>
+		<h3>
+			<img src = "images/jerry.png" /><br />
+			Jerry: <span id = "jerryspan">0</span>
+		</h3>
+		
+		<h3>
+			<button onclick = "runLap();">Run!</button>
+		</h3>
+		
+		<p id = "winnercomment">
+		</p>
+	</body>
+</html>

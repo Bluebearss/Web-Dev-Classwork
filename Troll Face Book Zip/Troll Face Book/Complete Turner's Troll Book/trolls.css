@@ -1,0 +1,141 @@
+body
+{
+	color:#663300;
+}
+
+/*
+	The maincontainer <div> holds all of the columns.
+	
+	The relative position keeps the div in its static position because there are no adjustments to the coordinates, but it can now be used to create a frame for children who have absolute positioning.
+*/
+div.maincontainer
+{
+	margin:auto;					/*	Centers the div.	*/
+	width:90%;
+	position:relative;
+}
+
+/*
+	The background image is actually an image element.  It is sized and positioned to fill the entire window.  The fixed positioning prevents it from moving and the z-index places it behind all of the content.
+*/
+img.backimg
+{
+	width:100%;
+	height:100%;
+	position:fixed;
+	z-index:-1;
+	top:0px;
+	left:0px;
+}
+
+/*
+	This is the larger column.  The 2 most important properties of columns are:
+	display:inline-block
+	width:X%
+	
+	Since the columns on this page have different widths, they are defined in different sections.
+*/
+div#maintext
+{
+	margin:auto;					/*	Centers the div	*/
+	display:inline-block;
+	width:70%;
+	text-align:center;
+	vertical-align:top;
+	position:relative;
+	overflow:hidden;				/*	Hides content that extends beyond the height of the div.	*/
+}
+
+img#scroll
+{
+	width:95%;						/*	Changes the width of the scroll image based on the resolution.	*/
+}
+
+/*
+	This image needs to be in the top right corner of the scroll regardless of resolution.  This is achieved by setting its position to absolute and its top and RIGHT properties to percentages (if it needed to be elsewhere, you might use a different combination of top, left, bottom, right).  The percentages used were settled upon using trial and error.
+	
+	The 25% width keeps the size of the image consistent with the size of the scroll.
+*/
+img#rip
+{
+	position:absolute;
+	top:12%;
+	right:10%;
+	opacity:0.6;
+	width:25%;
+}
+
+/*
+	These are the "chapters".
+	
+	Just like the "rip" image, these chapters need to be in a specific position on the scroll.  Once again, they are positioned absolutely and given coordinates using percentages (this time top and left).  By keeping the height at 70%, the text will never go below the scrolled part of the scroll.
+*/
+div#maintext div
+{
+	font:14pt calibri;
+	display:none;
+	text-align:justify;
+	position:absolute;
+	top:15%;
+	left:12%;
+	width:78%;
+	height:70%;
+	overflow:auto;			/*	If the text runs beyond the height of the div, a scrollbar will show.	*/
+}
+
+div.sidemenu
+{
+	margin:auto;
+	display:inline-block;
+	width:25%;
+	max-width:200px;
+	margin-top:10%;
+	text-align:center;
+}
+
+/*
+	The spans in the side menu are treated as columns even though the 70% width pushes each one to the next line.  This provides a good way to size and space them all evenly.
+*/
+div.sidemenu span
+{
+	display:inline-block;
+	cursor:pointer;
+	width:70%;
+}
+
+div.sidemenu span:hover
+{
+	background-color:#663300; 
+	color:#E6C580;
+	font-style:italic;
+}
+
+div.sidemenu img
+{
+	width:50%;
+	margin-top:10px;
+	cursor:pointer;
+}
+
+h1
+{
+	text-align:center;
+}
+
+h1 span
+{
+	font:bold 40pt papyrus;
+}
+
+/*
+	Every span on the page, including the one in the h1, looks like this.
+*/
+span
+{
+	background-color:#E6C580; 
+	border-radius:9px; 
+	padding:2px 5px;
+	margin-top:20px;					/*	This margin works for each span, creating space and pushing down all the rest each time.	*/
+	font: bold 18pt calibri;
+	text-align:left;
+}

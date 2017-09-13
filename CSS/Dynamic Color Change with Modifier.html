@@ -1,0 +1,186 @@
+<!DOCTYPE HTML>
+<!-- Brian Zhu -->
+<html>
+	<head>
+		<title>Dynamic Color Change</title>
+		
+		<style></style>
+		
+		<script>
+			function initialize()
+			{
+				colorBoxElement = document.getElementById("colorbox");
+				
+				redBack = 255;
+				greenBack = 255;
+				blueBack = 255;
+			}
+			
+			function modifyRed(modifier)
+			{
+				redBack += modifier;
+			}
+			
+			function modifyGreen(modifier)
+			{
+				greenBack += modifier;
+			}
+			
+			function modifyBlue(modifier)
+			{
+				blueBack += modifier;
+			}
+
+/*
+			
+			function addOneToRed()
+			{
+				redBack += 1;
+			}
+			
+			function addFiveToRed()
+			{
+				redBack += 5;
+			}
+			
+			function addTenToRed()
+			{
+				redBack += 10;
+			}
+			
+			function subtractOneToRed()
+			{
+				redBack -= 1;
+			}
+			
+			function subtractFiveToRed()
+			{
+				redBack -= 5;
+			}
+			
+			function subtractTenToRed()
+			{
+				redBack -= 10;
+			}
+			
+			function addOneToGreen()
+			{
+				greenBack += 1;
+			}
+			
+			function addFiveToGreen()
+			{
+				greenBack += 5;
+			}
+			
+			function addTenToGreen()
+			{
+				greenBack += 10;
+			}
+			
+			function subtractOneToGreen()
+			{
+				greenBack -= 1;
+			}
+			
+			function subtractFiveToGreen()
+			{
+				greenBack -= 5;
+			}
+			
+			function subtractTenToGreen()
+			{
+				greenBack -= 10;
+			}
+			
+			function addOneToBlue()
+			{
+				blueBack += 1;
+			}
+			
+			function addFiveToBlue()
+			{
+				blueBack += 5;
+			}
+			
+			function addTenToBlue()
+			{
+				blueBack += 10;
+			}
+			
+			function subtractOneToBlue()
+			{
+				blueBack -= 1;
+			}
+			
+			function subtractFiveToBlue()
+			{
+				blueBack -= 5;
+			}
+			
+			function subtractTenToBlue()
+			{
+				blueBack -= 10;
+			}
+*/
+			
+			function drawColors()
+			{
+				rgbString = "rgb(" + redBack + "," + greenBack + "," + blueBack + ")";
+				
+				document.body.style.backgroundColor = rgbString;
+				
+				colorBoxElement.innerHTML = rgbString;
+			}
+		</script>
+	</head>
+	
+	<body onload = "initialize();">
+		<div id = "colorbox">
+			rgb(255,255,255);
+		</div>
+		
+		<p>
+		<button onclick = "modifyRed(1); drawColors();">Add 1 Red</button>
+		
+		<button onclick = "modifyRed(5); drawColors();">Add 5 Red</button>
+		
+		<button onclick = "modifyRed(10); drawColors();">Add 10 Red</button>
+		
+		<button onclick = "modifyRed(-1); drawColors();">Subtract 1 Red</button>
+		
+		<button onclick = "modifyRed(-5); drawColors();">Subtract 5 Red</button>
+		
+		<button onclick = "modifyRed(-10); drawColors();">Subtract 10 Red</button>
+		</p>
+		
+		<p>
+		<button onclick = "modifyGreen(1); drawColors();">Add 1 Green</button>
+		
+		<button onclick = "modifyGreen(5); drawColors();">Add 5 Green</button>
+		
+		<button onclick = "modifyGreen(10); drawColors();">Add 10 Green</button>
+		
+		<button onclick = "modifyGreen(-1); drawColors();">Subtract 1 Green</button>
+		
+		<button onclick = "modifyGreen(-5); drawColors();">Subtract 5 Green</button>
+		
+		<button onclick = "modifyGreen(-10); drawColors();">Subtract 10 Green</button>
+		</p>
+		
+		<p>
+		<button onclick = "modifyBlue(1); drawColors();">Add 1 Blue</button>
+		
+		<button onclick = "modifyBlue(5); drawColors();">Add 5 Blue</button>
+		
+		<button onclick = "modifyBlue(10); drawColors();">Add 10 Blue</button>
+		
+		<button onclick = "modifyBlue(-1); drawColors();">Subtract 1 Blue</button>
+		
+		<button onclick = "modifyBlue(5); drawColors();">Subtract 5 Blue</button>
+		
+		<button onclick = "modifyBlue(-10); drawColors();">Subtract 10 Blue</button>
+		</p>
+		
+	</body>
+</html>
